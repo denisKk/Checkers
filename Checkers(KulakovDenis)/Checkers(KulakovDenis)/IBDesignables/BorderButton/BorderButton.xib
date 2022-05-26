@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BorderButton" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+            <connections>
+                <outlet property="captionLabel" destination="Nm4-SQ-8zs" id="gle-qR-BaX"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="zxf-u1-xvs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Nm4-SQ-8zs">
+                    <rect key="frame" x="8" y="0.0" width="403" height="128"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="23"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Nm4-SQ-8zs" secondAttribute="trailing" constant="8" id="Ihi-3Z-JMi"/>
+                <constraint firstAttribute="bottom" secondItem="Nm4-SQ-8zs" secondAttribute="bottom" id="piK-hg-2Jp"/>
+                <constraint firstItem="Nm4-SQ-8zs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="uK7-i7-gWG"/>
+                <constraint firstItem="Nm4-SQ-8zs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vWu-I5-PEX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="177.536231884058" y="-130.58035714285714"/>
+        </view>
+    </objects>
+</document>

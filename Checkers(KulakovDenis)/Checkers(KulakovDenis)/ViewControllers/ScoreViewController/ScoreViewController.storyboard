@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Score View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="ScoreViewController" customModule="Checkers_KulakovDenis_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" customClass="GradientBackgroundView" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6CN-t4-jZ1" userLabel="Top Bar">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpQ-qD-DY8">
+                                        <rect key="frame" x="8" y="44" width="60" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="QH7-Cm-GGO"/>
+                                            <constraint firstAttribute="width" constant="60" id="YGv-Ii-6zQ"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="">
+                                            <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="closeButtonTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ufi-z2-X4k"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L85-hl-J54">
+                                        <rect key="frame" x="176.5" y="50" width="61" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="DpQ-qD-DY8" firstAttribute="leading" secondItem="6CN-t4-jZ1" secondAttribute="leading" constant="8" id="05t-KO-Ucq"/>
+                                    <constraint firstAttribute="bottom" secondItem="DpQ-qD-DY8" secondAttribute="bottom" constant="8" id="14v-Wn-6GP"/>
+                                    <constraint firstItem="L85-hl-J54" firstAttribute="centerY" secondItem="DpQ-qD-DY8" secondAttribute="centerY" id="E1U-SM-qfo"/>
+                                    <constraint firstItem="L85-hl-J54" firstAttribute="centerX" secondItem="6CN-t4-jZ1" secondAttribute="centerX" id="yac-wX-wjc"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kZi-7l-Pij">
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kZi-7l-Pij" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5GX-Kp-28E"/>
+                            <constraint firstItem="6CN-t4-jZ1" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9Nx-6K-oPe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="kZi-7l-Pij" secondAttribute="bottom" id="SWS-80-fi9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="top" secondItem="6CN-t4-jZ1" secondAttribute="bottom" constant="-48" id="ZEN-IV-bLJ"/>
+                            <constraint firstItem="kZi-7l-Pij" firstAttribute="top" secondItem="6CN-t4-jZ1" secondAttribute="bottom" id="Zxj-bG-sSh"/>
+                            <constraint firstItem="6CN-t4-jZ1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cIB-tC-pth"/>
+                            <constraint firstItem="6CN-t4-jZ1" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="g78-5p-SST"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kZi-7l-Pij" secondAttribute="trailing" id="kOs-35-TSv"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" name="firstGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" name="secondGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                <point key="value" x="1" y="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                <point key="value" x="1" y="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="kZi-7l-Pij" id="xRu-3i-ZUZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="20" y="78"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="firstGradientColor">
+            <color red="0.15686274509803921" green="0.19215686274509805" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="secondGradientColor">
+            <color red="0.28235294117647058" green="0.32941176470588235" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

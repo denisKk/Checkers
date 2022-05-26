@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mrS-BB-lfk">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="MenuViewController" customModule="Checkers_KulakovDenis_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" customClass="GradientBackgroundView" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzd-yy-9E1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="358.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9of-nd-JcE">
+                                        <rect key="frame" x="117.5" y="89.5" width="179" height="179.5"/>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="9of-nd-JcE" secondAttribute="height" multiplier="1:1" id="sL3-8a-29B"/>
+                                        </constraints>
+                                        <imageReference key="image" image="avatar" symbolScale="small"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="thin"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lev-o0-7q5">
+                                        <rect key="frame" x="150.5" y="277" width="113" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="750" constant="50" id="6Ft-b1-c0e"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="9of-nd-JcE" firstAttribute="height" secondItem="mzd-yy-9E1" secondAttribute="height" multiplier="0.5" id="96J-cX-XlH"/>
+                                    <constraint firstItem="9of-nd-JcE" firstAttribute="centerY" secondItem="mzd-yy-9E1" secondAttribute="centerY" id="Hto-0T-1fb"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lev-o0-7q5" secondAttribute="bottom" priority="750" constant="10" id="Sba-dG-r1c"/>
+                                    <constraint firstItem="Lev-o0-7q5" firstAttribute="centerX" secondItem="mzd-yy-9E1" secondAttribute="centerX" id="oG9-De-Otc"/>
+                                    <constraint firstItem="Lev-o0-7q5" firstAttribute="top" secondItem="9of-nd-JcE" secondAttribute="bottom" constant="8" id="rXe-pd-Fti"/>
+                                    <constraint firstItem="9of-nd-JcE" firstAttribute="centerX" secondItem="mzd-yy-9E1" secondAttribute="centerX" id="sKP-dH-v0A"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GsL-EH-CKX">
+                                <rect key="frame" x="0.0" y="358.5" width="414" height="537.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vm1-O7-EoF" customClass="BorderButton" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                                        <rect key="frame" x="62" y="432" width="290" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="IUF-kZ-5RA"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Info"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" name="ButtonsColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isEnabled" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asd-qg-O9x" customClass="BorderButton" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                                        <rect key="frame" x="62" y="357" width="290" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FGZ-4v-c05"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Settings"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isEnabled" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" name="ButtonsColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1i-rE-9t2" customClass="BorderButton" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                                        <rect key="frame" x="62" y="282" width="290" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Lxm-PY-DkJ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Score"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" name="ButtonsColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isEnabled" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vG2-0O-seq" customClass="BorderButton" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
+                                        <rect key="frame" x="62" y="207" width="290" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="jov-AQ-Gk7"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="caption" value="Start game"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" name="ButtonsColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isEnabled" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="top" secondItem="asd-qg-O9x" secondAttribute="bottom" constant="25" id="2fq-aU-eAx"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="width" secondItem="GsL-EH-CKX" secondAttribute="width" multiplier="0.7" id="Ef1-7w-iqK"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="centerX" secondItem="GsL-EH-CKX" secondAttribute="centerX" id="TGD-8v-WMe"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="leading" secondItem="asd-qg-O9x" secondAttribute="leading" id="c35-Ks-aNG"/>
+                                    <constraint firstItem="asd-qg-O9x" firstAttribute="top" secondItem="K1i-rE-9t2" secondAttribute="bottom" constant="25" id="ceS-xa-E0F"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="leading" secondItem="vG2-0O-seq" secondAttribute="leading" id="cif-oP-GYF"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="leading" secondItem="K1i-rE-9t2" secondAttribute="leading" id="dFC-VY-pDm"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="centerY" secondItem="GsL-EH-CKX" secondAttribute="centerY" multiplier="1.7" id="dXK-lH-wvQ"/>
+                                    <constraint firstItem="K1i-rE-9t2" firstAttribute="top" secondItem="vG2-0O-seq" secondAttribute="bottom" constant="25" id="hRq-e1-RwR"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="trailing" secondItem="K1i-rE-9t2" secondAttribute="trailing" id="hnd-KO-YHL"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="trailing" secondItem="asd-qg-O9x" secondAttribute="trailing" id="pfr-51-ZK3"/>
+                                    <constraint firstItem="Vm1-O7-EoF" firstAttribute="trailing" secondItem="vG2-0O-seq" secondAttribute="trailing" id="rLf-JR-VBB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GsL-EH-CKX" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.6" id="67R-12-CLR"/>
+                            <constraint firstItem="GsL-EH-CKX" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="L2G-uT-0Vg"/>
+                            <constraint firstItem="GsL-EH-CKX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OlN-7g-wy4"/>
+                            <constraint firstAttribute="bottom" secondItem="GsL-EH-CKX" secondAttribute="bottom" id="SZW-ns-PeX"/>
+                            <constraint firstItem="GsL-EH-CKX" firstAttribute="top" secondItem="mzd-yy-9E1" secondAttribute="bottom" id="ZXI-4q-HCr"/>
+                            <constraint firstItem="mzd-yy-9E1" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="ft0-d9-7aV"/>
+                            <constraint firstItem="mzd-yy-9E1" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="nFm-7F-94M"/>
+                            <constraint firstItem="mzd-yy-9E1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="y5C-kb-Dns"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" name="firstGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" name="secondGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                <point key="value" x="1" y="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                <point key="value" x="1" y="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <navigationItem key="navigationItem" id="6aE-EA-B2D"/>
+                    <connections>
+                        <outlet property="avatarImageView" destination="9of-nd-JcE" id="5jy-jQ-ggN"/>
+                        <outlet property="infoButton" destination="Vm1-O7-EoF" id="BOg-Rz-okK"/>
+                        <outlet property="scoreButton" destination="K1i-rE-9t2" id="hPP-Lg-B2K"/>
+                        <outlet property="settingsButton" destination="asd-qg-O9x" id="9Ah-BJ-Xf3"/>
+                        <outlet property="startGameButton" destination="vG2-0O-seq" id="vP1-DZ-bFd"/>
+                        <outlet property="userNameLabel" destination="Lev-o0-7q5" id="UBX-J2-mkb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.92753623188412" y="92.410714285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2Pc-9F-0aV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mrS-BB-lfk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6KU-tK-aMn">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="pQi-5f-Cnk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Sf-KR-itH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="16.923076923076923" y="92.417061611374407"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="avatar" width="145" height="145"/>
+        <namedColor name="ButtonsColor">
+            <color red="0.027450980392156862" green="0.74509803921568629" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="firstGradientColor">
+            <color red="0.15686274509803921" green="0.19215686274509805" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="secondGradientColor">
+            <color red="0.28235294117647058" green="0.32941176470588235" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
