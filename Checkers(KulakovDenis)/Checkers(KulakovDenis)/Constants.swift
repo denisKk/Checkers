@@ -15,4 +15,3 @@ var SCREEN_HEIGHT: CGFloat {
     return UIScreen.main.bounds.height
 }
 
-let NOTIFICATION_CHANGE_LAST_STEP: String = "ChangeLastStep"

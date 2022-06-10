@@ -11,10 +11,25 @@ import UIKit
 typealias FireStep = (fromTag: Int, toTag: Int)
 
 enum Direction: Int {
-    case topLeft = 7
-    case topRight = 9
-    case bottomLeft = -9
-    case bottomRight = -7
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+    
+    var rawValue: Int {
+            get {
+                switch self {
+                case .topLeft:
+                    return BOARD_SIZE - 1
+                case .topRight:
+                    return BOARD_SIZE + 1
+                case .bottomLeft:
+                    return -1 * (BOARD_SIZE + 1)
+                case .bottomRight:
+                    return -1 * (BOARD_SIZE - 1)
+                }
+            }
+        }
     
     
     static var allDirections: [Direction] {
@@ -107,4 +122,25 @@ enum ChessType: Int {
             return true
         }
     }
+    
+    func upgrade() -> ChessType{
+        switch self {
+        case .white:
+            return .whiteQueen
+        case .black:
+            return  .blackQueen
+        default: return self
+        }
+    }
+}
+
+func getTagByIndex(_ index: Int) -> Int{
+    let row = ((index + 1) % (BOARD_SIZE/2) == 0) ? (index + 1) / (BOARD_SIZE/2) : (index + 1) / (BOARD_SIZE/2) + 1
+    return (row % 2 == 0) ? (index + 1) * 2 : ((index + 1) * 2) - 1
+}
+
+func getIndexByTag(_ tag: Int) -> Int?{
+    guard tag <= BOARD_SIZE*BOARD_SIZE && tag > 0 else {return nil}
+    let row = (tag % BOARD_SIZE == 0) ? tag / BOARD_SIZE : tag / BOARD_SIZE + 1
+    return (row % 2 == 0) ? (tag % 2 == 0 ? ((tag / 2) - 1) : nil) : (tag % 2 == 0 ? nil : (((tag + 1) / 2) - 1))
 }

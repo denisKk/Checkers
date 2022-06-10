@@ -86,15 +86,12 @@ class Settings: NSObject {
         }
     }
     
-    var gameTimeInSeconds: Int? {
+    var gameTimeInSeconds: Int {
         set {
-            if let seconds = newValue {
-                UserDefaults.standard.set(seconds, forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue)
-                print("Save time \(seconds)")
-            }
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue)
         }
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue)
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue) 
         }
     }
     
