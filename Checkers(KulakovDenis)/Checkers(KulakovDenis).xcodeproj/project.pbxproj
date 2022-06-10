@@ -10,6 +10,7 @@
 		B83D4B1828329AF400688464 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B83D4B1728329AF400688464 /* GoogleService-Info.plist */; };
 		B83D4B1B284001F800688464 /* CHLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D4B1A284001F800688464 /* CHLogic.swift */; };
 		B83D4B1E2840039800688464 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D4B1D2840039800688464 /* Game.swift */; };
+		B83D4B202840321200688464 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D4B1F2840321200688464 /* Player.swift */; };
 		B8436F0627CE63A800947EF2 /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8436F0427CE63A800947EF2 /* ScoreTableViewCell.swift */; };
 		B8436F0727CE63A800947EF2 /* ScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8436F0527CE63A800947EF2 /* ScoreTableViewCell.xib */; };
 		B8436F0927CE70E700947EF2 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8436F0827CE70E700947EF2 /* ScoreViewController.swift */; };
@@ -51,6 +52,7 @@
 		B83D4B1728329AF400688464 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B83D4B1A284001F800688464 /* CHLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHLogic.swift; sourceTree = "<group>"; };
 		B83D4B1D2840039800688464 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		B83D4B1F2840321200688464 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B8436F0427CE63A800947EF2 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		B8436F0527CE63A800947EF2 /* ScoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScoreTableViewCell.xib; sourceTree = "<group>"; };
 		B8436F0827CE70E700947EF2 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				B83D4B1A284001F800688464 /* CHLogic.swift */,
 				B83D4B1D2840039800688464 /* Game.swift */,
+				B83D4B1F2840321200688464 /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				B8FDE74F27C577450087F33C /* Constants.swift in Sources */,
 				B8FDE71F27C5769A0087F33C /* AppDelegate.swift in Sources */,
 				B8FDE75A27C589F90087F33C /* BorderButton.swift in Sources */,
+				B83D4B202840321200688464 /* Player.swift in Sources */,
 				B8FDE76327C59C240087F33C /* Settings.swift in Sources */,
 				B8FDE75527C584400087F33C /* UITextField.swift in Sources */,
 				B8FDE78427C91B190087F33C /* BackgroundGradientTableViewCell.swift in Sources */,
