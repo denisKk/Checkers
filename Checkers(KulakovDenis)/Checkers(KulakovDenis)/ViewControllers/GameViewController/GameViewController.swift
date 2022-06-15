@@ -51,12 +51,15 @@ class GameViewController: UIViewController {
             self?.printBordersIfCanStep()
         }
         
-        game.showStep = { [weak self] fromTag, toTag, fireTag in
+        game.showStep = { [weak self] fromTag, toTag in
             guard let self = self,
                   let fromView = self.chessboardView.viewWithTag(abs(fromTag)),
                   let toView = self.chessboardView.viewWithTag(abs(toTag)),
                   let chessView = fromView.subviews.first(where: {$0 as? ChessView != nil}) as? ChessView
-            else {return}
+            else {
+                self?.game.nextStep()
+                return
+            }
 
             if fromTag == toTag {
                 if fromTag > 0 {
@@ -191,13 +194,17 @@ extension GameViewController {
                 chessView.border(show: false)
             }
         }
-        guard let arrayTags = game.tagsForMustFire(), arrayTags.isEmpty == false else {
-            let array = game.getTagsByCurrrentColor()
-            for tag in array {
-                if let chessView = chessboardView.viewWithTag(tag)?.subviews.first as? ChessView {
-                    chessView.border(show: true)
-                }
-            }
+//        guard let arrayTags = game.tagsForMustFire() else {
+//            let array = game.getTagsByCurrrentColor()
+//            for tag in array {
+//                if let chessView = chessboardView.viewWithTag(tag)?.subviews.first as? ChessView {
+//                    chessView.border(show: true)
+//                }
+//            }
+//            return
+//        }
+        
+        guard let arrayTags = game.getTagsForBorders() else {
             return
         }
         
@@ -365,7 +372,7 @@ extension GameViewController {
                 width: cellView.frame.width,
                 type: type
             )
-            //  cView.isQueen = animationItem.value > 1 || animationItem.value < -1
+            chessView.isQueen = animationItem.value > 1 || animationItem.value < -1
             
             
             

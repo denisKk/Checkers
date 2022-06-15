@@ -27,7 +27,7 @@ class Game {
     
     
     var playerChanged: (() -> ())?
-    var showStep: ((_ fromTag: Int, _ toTag: Int, _ fireTag: Int) -> ())?
+    var showStep: ((_ fromTag: Int, _ toTag: Int) -> ())?
     
     private(set) var state: GameState = .none {
         didSet {
@@ -150,6 +150,11 @@ class Game {
         return nil
     }
     
+    
+    func getTagsForBorders() -> [Int]? {
+        tagsForMustFire() ?? tagsForCanStep() ?? nil
+    }
+    
     func tagsForMustFire() -> [Int]? {
         var arrayIndexes: [Int] = []
         for (index, value) in chessArray.enumerated() {
@@ -159,6 +164,23 @@ class Game {
                 for direction in Direction.allDirections {
                     if checkFireBy(tag: getTagByIndex(index), in: direction, for: chessType) {
                         arrayIndexes.append(getTagByIndex(index))
+                    }
+                }
+            }
+        }
+        return arrayIndexes.isEmpty ? nil : arrayIndexes
+    }
+    
+    func tagsForCanStep() -> [Int]? {
+        var arrayIndexes: [Int] = []
+        for (index, value) in chessArray.enumerated() {
+            if let chessType = ChessType(rawValue: value),
+               chessType != .none, chessType.getChessColor() == currentStep?.color
+            {
+                for direction in chessType.getDirections() {
+                    if checkStepBy(tag: getTagByIndex(index), direction: direction) {
+                        arrayIndexes.append(getTagByIndex(index))
+                        break
                     }
                 }
             }
@@ -199,6 +221,32 @@ class Game {
         getTags(by: currentStep!.color)
     }
     
+    func getFreeCells(startTag: Int, direction: Direction) -> [Int] {
+        var array = [Int]()
+        var newTag = startTag
+        while checkStepBy(tag: newTag, direction: direction) {
+            newTag += direction.rawValue
+            array.append(newTag)
+        }
+        return array
+    }
+    
+    func getFireCells(startTag: Int, direction: Direction, type: ChessType) -> [Int]? {
+        var array = [Int]()
+        var newTag = startTag
+        while let index = getIndexByTag(newTag), chessArray[index] == ChessType.none.rawValue {
+            
+            for checkDirection in direction.otherDirections() {
+                if checkFireBy(tag: newTag, in: checkDirection, for: type) {
+                    array.append(newTag)
+                }
+            }
+            newTag += direction.rawValue
+        }
+        return array.isEmpty ? nil : array
+    }
+    
+    
     func getTagsToCanStep(tag: Int) -> [Int]? {
         guard let chessType = getChessType(by: tag) else {return nil}
         
@@ -212,7 +260,7 @@ class Game {
             for direction in directions {
                 if checkStepBy(tag: tag, direction: direction)
                 {
-                    if chessType == .blackQueen || chessType == .whiteQueen {
+                    if chessType.isQueen() {
                         var newTag = tag + direction.rawValue
                         while checkStepBy(tag: newTag, direction: direction) {
                             newTag += direction.rawValue
@@ -253,30 +301,65 @@ class Game {
         for direction in directions {
             newArray = array
             var nextTag = tag
-            if type.isQueen() {
+            if type.isQueen() {//}, array.isEmpty {
                 while getChessType(by: nextTag + direction.rawValue) == ChessType.none {
                     nextTag += direction.rawValue
                 }
             }
             
             if checkFireBy(tag: nextTag, in: direction, for: type) {
+                
                 let newTag = nextTag + 2 * direction.rawValue
                 let newDirections = direction.otherDirections()
-                newArray.append(FireStep(fromTag: tag, toTag: newTag))
-                var newType = type
-                if type == .white && newTag > (BOARD_SIZE * (BOARD_SIZE - 1)) {
-                    newType = ChessType.whiteQueen
+                
+                if type.isQueen() {
+                    if let array = getFireCells(startTag: newTag, direction: direction, type: type) {
+                        for elementTag in array {
+                            let filter = newArray.map({getFireTag(by: $0)})
+                            let fireStep = FireStep(fromTag: tag, toTag: elementTag)
+                            if !filter.contains(getFireTag(by: fireStep)) {
+                                getFireSteps(for: elementTag, directions: newDirections, type: type, array: newArray + [fireStep])
+                                countDirection += 1
+                            }
+                        }
+                        newArray.removeAll()
+                    } else {
+                        let array = getFreeCells(startTag: newTag, direction: direction)
+                        
+                        let filter = newArray.map({getFireTag(by: $0)})
+                        let fireStep = FireStep(fromTag: tag, toTag: newTag)
+                        if !filter.contains(getFireTag(by: fireStep)) {
+                            fireStepArray.append(newArray + [fireStep])
+                            countDirection += 1
+                        }
+                        for elementTag in array {
+                            fireStepArray.append(newArray + [FireStep(fromTag: tag, toTag: elementTag)])
+                        }
+                        newArray.removeAll()
+                    }
+                    
                 }
-                
-                if type == .black && newTag <= BOARD_SIZE {
-                    newType = ChessType.blackQueen
+                else {
+                    newArray.append(FireStep(fromTag: tag, toTag: newTag))
+                    var newType = type
+                    if type == .white && newTag > (BOARD_SIZE * (BOARD_SIZE - 1)) {
+                        newType = ChessType.whiteQueen
+                    }
+                    
+                    if type == .black && newTag <= BOARD_SIZE {
+                        newType = ChessType.blackQueen
+                    }
+                    
+                    getFireSteps(for: newTag, directions: newDirections, type: newType, array: newArray )
+                    countDirection += 1
                 }
-                
-                getFireSteps(for: newTag, directions: newDirections, type: newType, array: newArray )
-                countDirection += 1
-            } else {
-                
+               
             }
+//            else {
+//                if type.isQueen() {
+//
+//                }
+//            }
         }
         if !newArray.isEmpty, countDirection == 0 {
             fireStepArray.append(newArray)
@@ -297,7 +380,7 @@ class Game {
         continueArray.removeAll()
         guard let fromIndex = getIndexByTag(fromTag),
               let toIndex = getIndexByTag(toTag) else {return}
-        showStep?(fromTag, toTag, 0)
+        showStep?(fromTag, toTag)
         chessArray.swapAt(fromIndex, toIndex)
         
         
@@ -332,7 +415,9 @@ class Game {
                             }
                         }
                     }
-                    let fireTag = step.toTag + getDirection(by: step).rawValue
+                   // let fireTag = step.toTag + getDirection(by: step).rawValue
+                    let fireTag = getFireTag(by: step)
+                    
                     continueArray.append(FireStep(fromTag: -1 * fireTag, toTag: -1 * fireTag))
                 }
             }
@@ -360,13 +445,30 @@ class Game {
                     self.chessArray[toIndex] = ChessType.none.rawValue
                 }
                 
-                showStep?(nextStep.toTag, nextStep.toTag, 0)
+                showStep?(nextStep.toTag, nextStep.toTag)
             }
             else {
                 chessArray.swapAt(fromIndex, toIndex)
-                showStep?(nextStep.fromTag, nextStep.toTag, 0)
+                showStep?(nextStep.fromTag, nextStep.toTag)
             }
         }
+    }
+    
+//    func getFireTag(fromTag: Int, direction: Direction) -> Int {
+//        var newTag = fromTag + direction.rawValue
+//        while let index = getIndexByTag(newTag), chessArray[index] == ChessType.none.rawValue {
+//            newTag += direction.rawValue
+//        }
+//        return newTag
+//    }
+    
+    func getFireTag(by step: FireStep) -> Int {
+        let direction = getDirection(by: step).rawValue
+        var newTag = step.toTag + direction
+        while let index = getIndexByTag(newTag), chessArray[index] == ChessType.none.rawValue {
+            newTag += direction
+        }
+        return newTag
     }
     
     func getDirection(by fireStep: FireStep) -> Direction {

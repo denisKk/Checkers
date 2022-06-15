@@ -64,7 +64,7 @@ class ChessView: UIView {
     }
     
     private func showQueen() {
-        guard let cellView = self.superview, let color = self.type.getChessColor() else {
+        guard let color = self.type.getChessColor() else {
             return
         }
         
