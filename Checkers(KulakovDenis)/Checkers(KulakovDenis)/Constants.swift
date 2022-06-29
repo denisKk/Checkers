@@ -6,8 +6,9 @@
 //
 import UIKit
 
-let BOARD_SIZE: Int = 8
-let CELL_WIDTH: Double = 50
+var BOARD_SIZE: Int {
+    get { Settings.shared.boardSize.rawValue }
+}
 var SCREEN_WIDTH: CGFloat {
     return UIScreen.main.bounds.width
 }

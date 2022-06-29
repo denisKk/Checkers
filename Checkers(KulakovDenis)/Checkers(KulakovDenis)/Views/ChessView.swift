@@ -30,6 +30,15 @@ enum ChessColor: String {
             self = .white
         }
     }
+    
+    func getSimpleChessType() -> ChessType {
+        switch self {
+        case .white:
+          return ChessType.white
+        case .black:
+          return ChessType.black
+        }
+    }
 }
 
 class ChessView: UIView {
@@ -46,7 +55,7 @@ class ChessView: UIView {
     
     init(width: CGFloat, type: ChessType) {
         self.type = type
-        let scale = 0.7
+        let scale = 0.8
         super.init(frame: CGRect(origin: .zero, size: CGSize(width: width * scale, height: width * scale)))
         
         if let color = type.getChessColor() {
@@ -64,15 +73,15 @@ class ChessView: UIView {
     }
     
     private func showQueen() {
-        guard let cellView = self.superview, let color = self.type.getChessColor() else {
+        guard let color = self.type.getChessColor() else {
             return
         }
         
         let imageView = UIImageView(frame: self.bounds)
         var imageColor = color
         imageColor.toggle()
-        imageView.image = UIImage(systemName: "crown")
-        imageView.tintColor = imageColor.cgColor.withAlphaComponent(0.7)
+        imageView.image = UIImage(systemName: "sparkle")
+        imageView.tintColor = imageColor.cgColor.withAlphaComponent(0.8)
         imageView.contentMode = .scaleAspectFit
         
         //UIView.transition(with: cellView, duration: 1, options: .transitionFlipFromLeft, animations: {

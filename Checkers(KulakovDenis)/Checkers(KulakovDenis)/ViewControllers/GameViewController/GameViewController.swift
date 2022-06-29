@@ -7,57 +7,59 @@
 
 import UIKit
 
-
-
-
 class GameViewController: UIViewController {
     
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var resetButton: BorderButton!
-    @IBOutlet weak var saveButton: BorderButton!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var topPlayerView: UserPanelView!
     
+    @IBOutlet weak var bottomPlayerView: UserPanelView!
     
     @IBOutlet weak var chessboardView: UIView!
     
     let game = Game.shared
-
+    
     var animationTimer = Timer()
     var animationsArray: [AnimationItem] = [] {
         didSet {
             startAnimationTimer()
         }
     }
-    var gameTimer = Timer()
-    
-    private var gameTimeInSeconds: Int = 0 {
-        didSet{
-            let min = (gameTimeInSeconds % 3600) / 60
-            let sec = (gameTimeInSeconds % 3600) % 60
-            let strMin = min < 10 ? "0\(min)" : "\(min)"
-            let strSec = sec < 10 ? "0\(sec)" : "\(sec)"
-            timeLabel.text = strMin + ":" + strSec
-        }
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.layoutIfNeeded()
+        
+        setupUI()
         game.loadGame()
+        createChessBoard()
+        createAnimationArray()
+        
         
         game.playerChanged = { [weak self] in
             self?.printBordersIfCanStep()
         }
         
-        game.showStep = { [weak self] fromTag, toTag, fireTag in
+        game.showMessage =  { [weak self] messageType, playerName in
+            
+            switch messageType {
+            case .draw :
+                self?.showAgreeAlert(playerName: playerName ?? "")
+            case .winner:
+                self?.showFinishGameAlertWith(winnerName: playerName)
+            }
+          
+        }
+        
+        game.showStep = { [weak self] fromTag, toTag in
             guard let self = self,
                   let fromView = self.chessboardView.viewWithTag(abs(fromTag)),
                   let toView = self.chessboardView.viewWithTag(abs(toTag)),
                   let chessView = fromView.subviews.first(where: {$0 as? ChessView != nil}) as? ChessView
-            else {return}
-
+            else {
+                self?.game.nextStep()
+                return
+            }
+            
             if fromTag == toTag {
                 if fromTag > 0 {
                     guard !chessView.isQueen else {
@@ -88,28 +90,38 @@ class GameViewController: UIViewController {
                 }
             }
         }
+        
+        setupPlayerPanels()
     }
     
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupUI()
-        createChessBoard()
-        createAnimationArray()
-    }
     
     @IBAction func backButtonTap(_ sender: Any) {
+        game.saveGame()
         goBack()
     }
     
     func goBack(){
-        
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func setupPlayerPanels(){
+        if let topPlayer = game.getPlayerBy(color: .black) {
+            topPlayerView.setupWith(player: topPlayer)
+        }
+        if let bottomPlayer = game.getPlayerBy(color: .white) {
+            bottomPlayerView.setupWith(player: bottomPlayer)
+        }
+    }
+    
+    
+    func startRematch(){
+        game.rematchGame()
+        setupPlayerPanels()
+        createAnimationArray()
     }
     
     deinit{
         animationTimer.invalidate()
-        gameTimer.invalidate()
     }
 }
 
@@ -117,30 +129,18 @@ class GameViewController: UIViewController {
 extension GameViewController {
     
     func setupUI(){
-        setupImageView()
-        setupButtons()
-        
         if let gradient = Settings.shared.gradientColor {
             if let view = self.view as? GradientBackgroundView {
                 view.setGradientColor(gradient: gradient)
             }
         }
     }
-    
-    func setupImageView(){
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
-    }
-    
-    func setupButtons(){
-        resetButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showResetAlert)))
-        
-        saveButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showSaveAlert)))
-    }
+
 }
 
 //MARK: Functions
 extension GameViewController {
-
+    
     func createChessBoard(){
         let cellWidth = chessboardView.frame.width / Double(BOARD_SIZE)
         var isBlack = true
@@ -158,46 +158,15 @@ extension GameViewController {
         }
     }
     
-    func loadData(){
-        userNameLabel.text = Settings.shared.userName
-        avatarImageView.image = Settings.shared.avatar
-    }
-    
-    func resetGame(){
-        gameTimer.invalidate()
-        gameTimeInSeconds = 0
-        //   Settings.shared.resetData()
-        //    fillArrayForStartPosition()
-        //    currentStep = .white
-        game.initialNewGame()
-        createAnimationArray()
-    }
-    
-    func finishGame() {
-        gameTimer.invalidate()
-        Settings.shared.resetData()
-        showFinishGameAlert()
-    }
-
-    func startTimer() {
-        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] _ in
-            gameTimeInSeconds += 1
-        })
-    }
-    
     func printBordersIfCanStep() {
+        
         chessboardView.subviews.forEach { view in
             if let chessView = view.subviews.first as? ChessView {
                 chessView.border(show: false)
             }
         }
-        guard let arrayTags = game.tagsForMustFire(), arrayTags.isEmpty == false else {
-            let array = game.getTagsByCurrrentColor()
-            for tag in array {
-                if let chessView = chessboardView.viewWithTag(tag)?.subviews.first as? ChessView {
-                    chessView.border(show: true)
-                }
-            }
+        
+        guard let arrayTags = game.getTagsForBorders() else {
             return
         }
         
@@ -209,7 +178,7 @@ extension GameViewController {
     }
     
     func printCellsIfCanStep(for tag: Int, show: Bool = true){
-        print("PRINT CELL IF CAN STEP")
+        
         guard let array = game.getTagsToCanStep(tag: tag) else {return}
         
         if show {
@@ -229,8 +198,6 @@ extension GameViewController {
             }
         }
     }
-    
-    
 }
 
 //MARK: Actions
@@ -249,10 +216,6 @@ extension GameViewController {
         case .began:
             
             chessboardView.bringSubviewToFront(cellView)
-            
-            if gameTimer.isValid == false {
-                startTimer()
-            }
             
             printCellsIfCanStep(for: cellView.tag)
             
@@ -290,40 +253,31 @@ extension GameViewController {
     }
     
     
-    @objc func showResetAlert(){
-        let alert = UIAlertController(title: "Reset game", message: "Are you sure?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { action in
-            self.resetGame()
+    func showAgreeAlert(playerName: String) {
+        let alert = UIAlertController(title: "A draw".localized + "?", message: "\(playerName) " + "offers a draw. Are you agree?".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Agree".localized, style: .default, handler: { _ in
+            
         }))
-        alert.addAction(UIAlertAction(title: "NO", style: .destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: "Continue".localized, style: .default, handler: { _ in
+           
+        }))
+        
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func showSaveAlert(){
+     func showFinishGameAlertWith(winnerName: String?){
+         let message = winnerName == nil ? "Game played to a draw".localized : "\(winnerName ?? "") " + "is winner".localized
         
-        let alert = UIAlertController(title: "Save game", message: "Are you sure?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { action in
-            self.game.saveGame()
-            self.startTimer()
+         let alert = UIAlertController(title: "Finish game".localized, message: message + "!", preferredStyle: .alert)
+         alert.addAction(UIAlertAction(title: "Exit".localized, style: .default, handler: { _ in
+            self.goBack()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
-            self.startTimer()
+         alert.addAction(UIAlertAction(title: "Rematch".localized, style: .default, handler: { _ in
+            self.startRematch()
         }))
-        self.present(alert, animated: true, completion: {
-            self.gameTimer.invalidate()
-        })
+        
+        self.present(alert, animated: true, completion: nil)
     }
-    
-    @objc func showFinishGameAlert(){
-        //        let winnerColor = currentStep.rawValue.uppercased()
-        //        let alert = UIAlertController(title: "Finish game", message: winnerColor + " is winner!", preferredStyle: .alert)
-        //        alert.addAction(UIAlertAction(title: "Super", style: .default, handler: { action in
-        //            self.goBack()
-        //        }))
-        //
-        //        self.present(alert, animated: true, completion: nil)
-    }
-    
 }
 
 
@@ -341,7 +295,7 @@ extension GameViewController {
         guard animationTimer.isValid == false else {
             return
         }
-        animationTimer = Timer.scheduledTimer(timeInterval: 0.18, target: self, selector: #selector(stepAnimation), userInfo: nil, repeats: true)
+        animationTimer = Timer.scheduledTimer(timeInterval: 0.14, target: self, selector: #selector(stepAnimation), userInfo: nil, repeats: true)
     }
     
     
@@ -365,9 +319,7 @@ extension GameViewController {
                 width: cellView.frame.width,
                 type: type
             )
-            //  cView.isQueen = animationItem.value > 1 || animationItem.value < -1
-            
-            
+            chessView.isQueen = animationItem.value > 1 || animationItem.value < -1
             
             UIView.transition(with: cellView, duration: 1, options: .transitionFlipFromLeft, animations: {chessView.showIn(view: cellView)})
             let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))

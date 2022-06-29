@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  Checkers(KulakovDenis)
+
+  Created by Dev on 29.06.22.
+  
+*/
+"Settings" = "Настройки";
+"You have a saved game. Are you continue or start new game?" = "У вас есть сохраненная игра. Вы хотите продолжить или начать новую игру?";
+"Continue" = "Продолжить";
+"New game" = "Новая игра";
+"Background Gradients" = "Фоновые градиенты";
+"Languages" = "Языки";
+"Checkers" = "Шашки";
+"SignIn" = "Регистрация";
+"User name" = "Имя пользователя";
+"Enter" = "Войти";
+"Hello" = "Привет";
+"Cancel" = "Отмена";
+"Edit avatar" = "Изменить аватар";
+"Delete" = "Удалить";
+"Two players" = "Два игрока";
+"History" = "История";
+"Info" = "Информация";
+"A draw" = "Ничья";
+"offers a draw. Are you agree?" = "предлагает ничью. Вы согласны?";
+"Agree" = "Соглашаюсь";
+"Continue" = "Продолжить";
+"Game played to a draw" = "Игра сыграна вничью";
+"is winner" = "победитель";
+"Finish game" = "Закончить игру";
+"Exit" = "Выход";
+"Rematch" = "Реванш";
+"Game parametrs" = "Параметры игры";
+"Second player name:" = "Имя второго игрока:";
+"Board size" = "Размер доски";
+"Time limit" = "Лимит времени";
+"Start game" = "Начать игру";
+"min" = "мин.";

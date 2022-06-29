@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GamesDB" representedClassName="GamesDB" syncable="YES">
+        <attribute name="boardSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeLimit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="players" toMany="YES" maxCount="2" deletionRule="Cascade" destinationEntity="PlayersDataDB"/>
+    </entity>
+    <entity name="PlayersDataDB" representedClassName="PlayersDataDB" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="result" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GamesDB"/>
+    </entity>
+    <elements>
+        <element name="GamesDB" positionX="-193.8125" positionY="-61.2109375" width="128" height="103"/>
+        <element name="PlayersDataDB" positionX="183.41015625" positionY="240.53515625" width="128" height="118"/>
+    </elements>
+</model>

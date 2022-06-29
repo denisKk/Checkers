@@ -25,4 +25,14 @@ extension UILabel {
     func size(w: Double, h: Double){
         self.frame = CGRect(origin: .zero, size: CGSize(width: w, height: h))
     }
+    
+    @IBInspectable var localizationKey: String {
+        set {
+            self.text = newValue.localized
+        }
+        
+        get {
+            return self.text ?? ""
+        }
+    }
 }

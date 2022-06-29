@@ -9,6 +9,26 @@ import Foundation
 import UIKit
 
 
+enum TimeType: Int, CaseIterable {
+    
+    case unlimit = 0
+    case tier1 = 1
+    case tier2 = 5 // 5 * 60
+    case tier3 = 10 // 10 * 60
+    case tier4 = 15 // 15 * 60
+    
+    func description() -> String {
+        switch self {
+            
+        case .unlimit:
+            return "∞"
+        default:
+            return "\(self.rawValue) " + "min".localized
+        }
+    }
+}
+
+
 enum GameState {
     case none
     case load
@@ -18,6 +38,11 @@ enum GameState {
     case finish
 }
 
+enum MessageType {
+    case winner
+    case draw
+}
+
 class Game {
     static let shared = Game()
     
@@ -25,9 +50,12 @@ class Game {
     private(set) var chessArray: [Int] = []
     private var fireStepArray: [[FireStep]] = []
     
-    
+    var gameTimer = Timer()
     var playerChanged: (() -> ())?
-    var showStep: ((_ fromTag: Int, _ toTag: Int, _ fireTag: Int) -> ())?
+    var showStep: ((_ fromTag: Int, _ toTag: Int) -> ())?
+    var showMessage: ((MessageType, String?) -> ())?
+    var timeLimit: TimeType = .unlimit
+    var gameChessColors: [ChessColor] = [.white, .black]
     
     private(set) var state: GameState = .none {
         didSet {
@@ -44,10 +72,11 @@ class Game {
             startGame()
         case .play:
             print("play state")
+            startTimer()
         case .wait:
             print("wait state")
         case .finish:
-            print("finish state")
+            finishGame()
         case .load:
             
             loadLocalData()
@@ -57,88 +86,163 @@ class Game {
     
     var players: [Player] = []
     
+    func startTimer() {
+        
+        guard !gameTimer.isValid else {return}
+        
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] _ in
+            if let player = currentStep {
+                switch timeLimit {
+                case .unlimit:
+                    player.time += 1
+                default:
+                    player.time -= 1
+                    if player.time <= 0 {
+                      //  state = .finish
+                        player.result = .lose
+                    }
+                }
+            }
+        })
+    }
+    
+    
     func loadGame() {
         addPlayers()
         state = .load
     }
     
+    func rematchGame(){
+        gameChessColors.swapAt(0, 1)
+        Settings.shared.rematchData()
+        loadGame()
+    }
+    
     func startGame() {
-        
         state = .play
         nextPlayer()
     }
     
+    func finishGame(){
+        gameTimer.invalidate()
+        saveGameToBase()
+    }
+    
+    func abortGame(){
+        
+    }
+    
+    func saveGameToBase(){
+        
+        let players = players.map { player in
+            PlayerHistory(name: player.name, result: player.result, time: player.time, color: player.color)
+        }
+        let gameHistory = GameHistory(date: Date(), timeLimit: timeLimit, boardSize: Settings.shared.boardSize, players: players)
+        CoreDataManager.shared.saveGameToBase(by: gameHistory)
+    }
+    
     func addPlayers(){
         players.removeAll()
-        let colors: [ChessColor] = [.white, .black]
         
-        for color in colors {
-            let player = Player(name: "Player \(color.rawValue)", color: color)
+        for color in gameChessColors {
+            let player = Player(name: "Player \(color.rawValue)", color: color, time: timeLimit.rawValue)
+            player.didResultChanged = { [weak self] in
+                switch player.result {
+                case .win:
+                    self?.finishGame()
+                    self?.showMessage?(.winner, player.name)
+                case .lose, .abort:
+                    if let otherPlayer = self?.players.first(where: {$0.name != player.name }) {
+                        otherPlayer.result = .win
+                    }
+                case .draw:
+                    if let _ = self?.players.first(where: {$0.result != .draw }) {
+                        self?.showMessage?(.draw, player.name)
+                    } else {
+                        self?.finishGame()
+                        self?.showMessage?(.winner, nil)
+                    }
+                default: break
+                }
+            }
             players.append(player)
         }
+    }
+    
+    func getPlayerBy(color: ChessColor) -> Player? {
+        if let player = players.first(where: {$0.color == color}) {
+            return player
+        }
+        return nil
     }
     
     func changeGameState(to state: GameState) {
         self.state = state
     }
-    
-    func initialNewGame(){
-        durationTime = 0
-        fillArrayForStartPosition()
-    }
+
     
     func loadLocalData() {
+
+        chessArray = Settings.shared.chessArray ?? arrayForStartPosition()
+        timeLimit = Settings.shared.timeLimit
         
-        guard let savedArray = Settings.shared.chessArray else {
-            initialNewGame()
-            return
+        if let player = getPlayerBy(color: .black), let savedName = Settings.shared.secondPlayerName {
+            player.name = savedName
+            player.time = Settings.shared.topPlayerTime == 0 ? timeLimit.rawValue * 60 : Settings.shared.topPlayerTime
         }
         
-        chessArray = savedArray
-        durationTime = Settings.shared.gameTimeInSeconds
+        if let player = getPlayerBy(color: .white) {
+            player.name = Settings.shared.userName ?? ""
+            player.time = Settings.shared.bottomPlayerTime == 0 ? timeLimit.rawValue * 60 : Settings.shared.bottomPlayerTime
+        }
+        
         if players.first?.color != Settings.shared.currentStep {
             players.swapAt(0, 1)
         }
-        
     }
     
     func nextPlayer() {
-        currentStep = players.removeFirst()
-        guard let currentStep = self.currentStep else {return}
-        players.append(currentStep)
+        guard let currentStep = players.first else {return}
+        self.currentStep = currentStep
+        players.swapAt(0, 1)
         playerChanged?()
     }
     
     
     func isFinishGame() -> Bool{
-        guard let _ = chessArray.first(where: {$0 > 0}), let _ = chessArray.first(where: {$0 < 0}) else {return true}
+        guard let _ = getTagsForBorders() else {return true}
         return false
     }
     
     var currentStep: Player? {
         didSet{
-            //  printBordersIfCanStep()
-            //   fireStepArray = nil
-        }
-        willSet{
-            if isFinishGame() {
-                print("FINISH GAME")
+
+            oldValue?.isActive = false
+            
+            guard !isFinishGame() else {
+                currentStep?.result = .lose
+                return
             }
+            
+            currentStep?.isActive = true
         }
     }
     
-    func fillArrayForStartPosition(){
-        chessArray = Array(repeating: 0, count: Int(BOARD_SIZE*BOARD_SIZE / 2))
+    func arrayForStartPosition() -> [Int] {
+        var array = Array(repeating: 0, count: Int(BOARD_SIZE*BOARD_SIZE / 2))
         for i in 0..<(BOARD_SIZE/2-1)*BOARD_SIZE/2 {
-            chessArray[i] = ChessType.white.rawValue
-            chessArray[chessArray.count - (i + 1)] = ChessType.black.rawValue
+            array[i] = ChessType.white.rawValue
+            array[array.count - (i + 1)] = ChessType.black.rawValue
         }
+        return array
     }
     
     func saveGame(){
         Settings.shared.chessArray = chessArray
         Settings.shared.currentStep = currentStep?.color ?? .white
-       // Settings.shared.gameTimeInSeconds = gameTimeInSeconds
+        Settings.shared.bottomPlayerTime = getPlayerBy(color: .white)?.time ?? 0
+        Settings.shared.topPlayerTime = getPlayerBy(color: .black)?.time ?? 0
+        // Settings.shared.gameTimeInSeconds = gameTimeInSeconds
     }
     
     
@@ -150,6 +254,11 @@ class Game {
         return nil
     }
     
+    
+    func getTagsForBorders() -> [Int]? {
+        tagsForMustFire() ?? tagsForCanStep() ?? nil
+    }
+    
     func tagsForMustFire() -> [Int]? {
         var arrayIndexes: [Int] = []
         for (index, value) in chessArray.enumerated() {
@@ -159,6 +268,23 @@ class Game {
                 for direction in Direction.allDirections {
                     if checkFireBy(tag: getTagByIndex(index), in: direction, for: chessType) {
                         arrayIndexes.append(getTagByIndex(index))
+                    }
+                }
+            }
+        }
+        return arrayIndexes.isEmpty ? nil : arrayIndexes
+    }
+    
+    func tagsForCanStep() -> [Int]? {
+        var arrayIndexes: [Int] = []
+        for (index, value) in chessArray.enumerated() {
+            if let chessType = ChessType(rawValue: value),
+               chessType != .none, chessType.getChessColor() == currentStep?.color
+            {
+                for direction in chessType.getDirections() {
+                    if checkStepBy(tag: getTagByIndex(index), direction: direction) {
+                        arrayIndexes.append(getTagByIndex(index))
+                        break
                     }
                 }
             }
@@ -195,9 +321,35 @@ class Game {
         return false
     }
     
-    func getTagsByCurrrentColor() -> [Int] {
-        getTags(by: currentStep!.color)
+//    func getTagsByCurrrentColor() -> [Int] {
+//        getTags(by: currentStep!.color)
+//    }
+    
+    func getFreeCells(startTag: Int, direction: Direction) -> [Int] {
+        var array = [Int]()
+        var newTag = startTag
+        while checkStepBy(tag: newTag, direction: direction) {
+            newTag += direction.rawValue
+            array.append(newTag)
+        }
+        return array
     }
+    
+    func getFireCells(startTag: Int, direction: Direction, type: ChessType) -> [Int]? {
+        var array = [Int]()
+        var newTag = startTag
+        while let index = getIndexByTag(newTag), chessArray[index] == ChessType.none.rawValue {
+            
+            for checkDirection in direction.otherDirections() {
+                if checkFireBy(tag: newTag, in: checkDirection, for: type) {
+                    array.append(newTag)
+                }
+            }
+            newTag += direction.rawValue
+        }
+        return array.isEmpty ? nil : array
+    }
+    
     
     func getTagsToCanStep(tag: Int) -> [Int]? {
         guard let chessType = getChessType(by: tag) else {return nil}
@@ -212,7 +364,7 @@ class Game {
             for direction in directions {
                 if checkStepBy(tag: tag, direction: direction)
                 {
-                    if chessType == .blackQueen || chessType == .whiteQueen {
+                    if chessType.isQueen() {
                         var newTag = tag + direction.rawValue
                         while checkStepBy(tag: newTag, direction: direction) {
                             newTag += direction.rawValue
@@ -253,29 +405,61 @@ class Game {
         for direction in directions {
             newArray = array
             var nextTag = tag
-            if type.isQueen() {
+            if type.isQueen() {//}, array.isEmpty {
                 while getChessType(by: nextTag + direction.rawValue) == ChessType.none {
                     nextTag += direction.rawValue
                 }
             }
             
             if checkFireBy(tag: nextTag, in: direction, for: type) {
+                
                 let newTag = nextTag + 2 * direction.rawValue
                 let newDirections = direction.otherDirections()
-                newArray.append(FireStep(fromTag: tag, toTag: newTag))
-                var newType = type
-                if type == .white && newTag > (BOARD_SIZE * (BOARD_SIZE - 1)) {
-                    newType = ChessType.whiteQueen
+                
+                
+                
+                if type.isQueen() {
+                    if let array = getFireCells(startTag: newTag, direction: direction, type: type) {
+                        for elementTag in array {
+                            let filter = newArray.map({getFireTag(by: $0)})
+                            let fireStep = FireStep(fromTag: tag, toTag: elementTag)
+                            if !filter.contains(getFireTag(by: fireStep)) {
+                                getFireSteps(for: elementTag, directions: newDirections, type: type, array: newArray + [fireStep])
+                                countDirection += 1
+                            }
+                        }
+                        newArray.removeAll()
+                    } else {
+                        let array = getFreeCells(startTag: newTag, direction: direction)
+                        
+                        let filter = newArray.map({getFireTag(by: $0)})
+                        let fireStep = FireStep(fromTag: tag, toTag: newTag)
+                        if !filter.contains(getFireTag(by: fireStep)) {
+                            fireStepArray.append(newArray + [fireStep])
+                            countDirection += 1
+                            for elementTag in array {
+                                fireStepArray.append(newArray + [FireStep(fromTag: tag, toTag: elementTag)])
+                            }
+                        }
+                        
+                        newArray.removeAll()
+                    }
+                    
                 }
-                
-                if type == .black && newTag <= BOARD_SIZE {
-                    newType = ChessType.blackQueen
+                else {
+                    newArray.append(FireStep(fromTag: tag, toTag: newTag))
+                    var newType = type
+                    if type == .white && newTag > (BOARD_SIZE * (BOARD_SIZE - 1)) {
+                        newType = ChessType.whiteQueen
+                    }
+                    
+                    if type == .black && newTag <= BOARD_SIZE {
+                        newType = ChessType.blackQueen
+                    }
+                    
+                    getFireSteps(for: newTag, directions: newDirections, type: newType, array: newArray )
+                    countDirection += 1
                 }
-                
-                getFireSteps(for: newTag, directions: newDirections, type: newType, array: newArray )
-                countDirection += 1
-            } else {
-                
             }
         }
         if !newArray.isEmpty, countDirection == 0 {
@@ -286,8 +470,8 @@ class Game {
     
     var continueArray = [FireStep]()
     
-    func isQueenZoneBy(index: Int) -> Bool {
-        if index < BOARD_SIZE/2 || index >= ((BOARD_SIZE * BOARD_SIZE)/2 - BOARD_SIZE/2) {
+    func isQueenZoneBy(index: Int, forColor: ChessColor) -> Bool {
+        if (index < BOARD_SIZE/2 && forColor == .black) || (index >= ((BOARD_SIZE * BOARD_SIZE)/2 - BOARD_SIZE/2) && forColor == .white) {
             return true
         }
         return false
@@ -296,12 +480,17 @@ class Game {
     func startStep(fromTag: Int, toTag: Int) {
         continueArray.removeAll()
         guard let fromIndex = getIndexByTag(fromTag),
-              let toIndex = getIndexByTag(toTag) else {return}
-        showStep?(fromTag, toTag, 0)
+              let toIndex = getIndexByTag(toTag),
+              let chessColor = getChessType(by: fromTag)?.getChessColor()
+        else {return}
+        showStep?(fromTag, toTag)
         chessArray.swapAt(fromIndex, toIndex)
         
         
-        if isQueenZoneBy(index: toIndex), getChessType(by: toTag)?.isQueen() == false {
+        if let chessType = getChessType(by: toTag),
+           chessType.isQueen() == false,
+           isQueenZoneBy(index: toIndex, forColor: chessColor)
+        {
             continueArray.append(FireStep(fromTag: toTag, toTag: toTag))
         }
         
@@ -316,23 +505,22 @@ class Game {
                 for i in 0..<steparray.count {
                     let step = steparray[i]
                     if i <= stepIndex {
-//                        let fireTag = step.toTag + getDirection(by: step).rawValue
-//                        continueArray.append(FireStep(fromTag: -1 * fireTag, toTag: -1 * fireTag))
-//
                         if let toIndex = getIndexByTag(step.toTag) {
-                            if isQueenZoneBy(index: toIndex), getChessType(by: step.toTag)?.isQueen() == false {
+                            
+                            if isQueenZoneBy(index: toIndex, forColor: chessColor), getChessType(by: step.toTag)?.isQueen() == false {
                                 continueArray.append(FireStep(fromTag: toTag, toTag: toTag))
                             }
                         }
                     } else {
                         continueArray.append(FireStep(fromTag: step.fromTag, toTag: step.toTag))
                         if let toIndex = getIndexByTag(step.toTag) {
-                            if isQueenZoneBy(index: toIndex), getChessType(by: step.toTag)?.isQueen() == false {
+                            if isQueenZoneBy(index: toIndex, forColor: chessColor), getChessType(by: step.toTag)?.isQueen() == false {
                                 continueArray.append(FireStep(fromTag: step.toTag, toTag: step.toTag))
                             }
                         }
                     }
-                    let fireTag = step.toTag + getDirection(by: step).rawValue
+                    let fireTag = getFireTag(by: step)
+                    
                     continueArray.append(FireStep(fromTag: -1 * fireTag, toTag: -1 * fireTag))
                 }
             }
@@ -360,13 +548,23 @@ class Game {
                     self.chessArray[toIndex] = ChessType.none.rawValue
                 }
                 
-                showStep?(nextStep.toTag, nextStep.toTag, 0)
+                showStep?(nextStep.toTag, nextStep.toTag)
             }
             else {
                 chessArray.swapAt(fromIndex, toIndex)
-                showStep?(nextStep.fromTag, nextStep.toTag, 0)
+                showStep?(nextStep.fromTag, nextStep.toTag)
             }
         }
+    }
+    
+    
+    func getFireTag(by step: FireStep) -> Int {
+        let direction = getDirection(by: step).rawValue
+        var newTag = step.toTag + direction
+        while let index = getIndexByTag(newTag), chessArray[index] == ChessType.none.rawValue {
+            newTag += direction
+        }
+        return newTag
     }
     
     func getDirection(by fireStep: FireStep) -> Direction {

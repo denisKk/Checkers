@@ -22,6 +22,8 @@ class BackgroundGradientTableViewCell: UITableViewCell {
         (#colorLiteral(red: 0.5843137255, green: 0.5568627451, blue: 0.4117647059, alpha: 1), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
     ]
     
+    var viewGradient: (UIColor, UIColor)?
+    
     var userClickGradient: (((UIColor, UIColor)) -> ())?
   
     @IBOutlet weak var collectionView: UICollectionView!
@@ -35,6 +37,19 @@ class BackgroundGradientTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.register(UINib.init(nibName: "BackgroundGradientCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BackgroundGradientCollectionViewCell")
     }
+    
+    func compareColors(index: Int) -> Bool {
+        if let viewGradient = viewGradient {
+            let element = gradientsArray[index]
+            if viewGradient.0.isEqual(element.0) && viewGradient.1.isEqual(element.1) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        return false
+    }
 }
 
 
@@ -44,7 +59,7 @@ extension BackgroundGradientTableViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BackgroundGradientCollectionViewCell", for: indexPath) as? BackgroundGradientCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setup(with: gradientsArray[indexPath.item])
+        cell.setup(with: gradientsArray[indexPath.item], check: compareColors(index: indexPath.row))
         return cell
     }
     
@@ -60,5 +75,6 @@ extension BackgroundGradientTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         userClickGradient?(gradientsArray[indexPath.item])
+        collectionView.reloadData()
     }
 }

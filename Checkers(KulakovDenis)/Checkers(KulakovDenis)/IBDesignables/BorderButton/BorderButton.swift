@@ -12,6 +12,7 @@ class BorderButton: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBInspectable var isEnabled: Bool {
         set {isEnabled_ = newValue}
@@ -34,8 +35,13 @@ class BorderButton: UIView {
     
     
     @IBInspectable var caption: String {
-        set {captionLabel.text = newValue}
+        set {captionLabel.text = newValue.localized}
         get {return captionLabel.text ?? ""}
+    }
+    
+    @IBInspectable var image: UIImage? {
+        set {imageView.image = newValue}
+        get {return imageView.image}
     }
     
     private var color_: UIColor = .clear {
@@ -54,6 +60,7 @@ class BorderButton: UIView {
         contentView.backgroundColor = UIColor.clear
         contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 1
+        captionLabel.text = ""
         self.addSubview(contentView)
     }
 
@@ -61,9 +68,11 @@ class BorderButton: UIView {
         if isEnabled {
             contentView.layer.borderColor = color_.cgColor
             captionLabel.textColor = color_
+            imageView.tintColor = color_
         } else {
             contentView.layer.borderColor = UIColor.lightGray.cgColor
             captionLabel.textColor = .lightGray
+            imageView.tintColor = .lightGray
         }
     }
     
