@@ -34,7 +34,15 @@ class MenuViewController: UIViewController {
         super.viewDidAppear(animated)
         setupImageView()
     }
-
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
     func setupUI(){
         setupButtons()
         if let gradient = Settings.shared.gradientColor {
@@ -54,7 +62,7 @@ class MenuViewController: UIViewController {
         CoreDataManager.shared.clearDataBase()
         guard let startVC = StartViewController.getInstanceViewController as? StartViewController
         else {return}
-
+        
         UIApplication.shared.windows.first?.rootViewController = startVC
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
@@ -87,21 +95,21 @@ class MenuViewController: UIViewController {
     
     func loadInterstitialView() {
         goToGameViewController()
-//        self.view.showLoading()
-//        let request = GADRequest()
-//        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
-//                                    request: request,
-//                          completionHandler: { [self] ad, error in
-//                            if let error = error {
-//                              print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-//                              return
-//                            }
-//                            interstitial = ad
-//                            interstitial?.fullScreenContentDelegate = self
-//
-//                            interstitial?.present(fromRootViewController: self)
-//                          }
-//        )
+        //        self.view.showLoading()
+        //        let request = GADRequest()
+        //        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+        //                                    request: request,
+        //                          completionHandler: { [self] ad, error in
+        //                            if let error = error {
+        //                              print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+        //                              return
+        //                            }
+        //                            interstitial = ad
+        //                            interstitial?.fullScreenContentDelegate = self
+        //
+        //                            interstitial?.present(fromRootViewController: self)
+        //                          }
+        //        )
     }
 }
 
@@ -117,10 +125,14 @@ extension MenuViewController {
     }
     
     func setupButtons(){
+        
+        
         startGameButton.caption = "Two players".localized
         scoreButton.caption = "History".localized
         settingsButton.caption = "Settings".localized
         infoButton.caption = "Info".localized
+//        guard let color = Settings.shared.gradientColor?.0 else {return}
+//        startGameButton.color = color
     }
     
     func setupActions(){
@@ -142,12 +154,12 @@ extension MenuViewController{
             let newGame = UIAlertAction(title: "New game".localized, style: .cancel, handler: {_ in
                 Settings.shared.resetData()
                 self.goToPropertyViewController()
-//                self.loadInterstitialView()
+                //                self.loadInterstitialView()
             })
             
             let continueGame = UIAlertAction(title: "Continue".localized, style: .default) { _ in
                 self.goToGameViewController()
-//                self.loadInterstitialView()
+                //                self.loadInterstitialView()
             }
             
             alert.addAction(newGame)
@@ -155,7 +167,7 @@ extension MenuViewController{
             present(alert, animated: true, completion: nil)
         } else {
             goToPropertyViewController()
-//            loadInterstitialView()
+            //            loadInterstitialView()
         }
     }
     
@@ -219,19 +231,19 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
 extension MenuViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-      print("Ad did fail to present full screen content.")
+        print("Ad did fail to present full screen content.")
         self.view.closeLoading()
         goToGameViewController()
     }
-
+    
     /// Tells the delegate that the ad will present full screen content.
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-      print("Ad will present full screen content.")
+        print("Ad will present full screen content.")
     }
-
+    
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-      print("Ad did dismiss full screen content.")
+        print("Ad did dismiss full screen content.")
         self.view.closeLoading()
         goToGameViewController()
     }

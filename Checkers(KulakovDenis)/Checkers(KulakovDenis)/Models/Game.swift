@@ -128,8 +128,16 @@ class Game {
         saveGameToBase()
     }
     
-    func abortGame(){
-        
+    func isDraw(agree: Bool){
+        if agree {
+            if let otherPlayer = players.first(where: {$0.result != .draw }) {
+                otherPlayer.result = .draw
+            }
+        } else {
+            if let player = players.first(where: {$0.result == .draw }) {
+                player.result = .none
+            }
+        }   
     }
     
     func saveGameToBase(){

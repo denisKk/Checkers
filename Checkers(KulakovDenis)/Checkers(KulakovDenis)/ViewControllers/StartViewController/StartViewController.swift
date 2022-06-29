@@ -25,6 +25,11 @@ class StartViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupBackground()
+    }
+    
     func setupUI(){
         setupTextField()
         setupButtons()
@@ -41,7 +46,7 @@ class StartViewController: UIViewController {
     func goToMenuViewController(){
         guard let menuVC = MenuViewController.getInstanceViewController as? UINavigationController
         else {return}
-
+        
         UIApplication.shared.windows.first?.rootViewController = menuVC
         UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
@@ -63,12 +68,21 @@ extension StartViewController {
         userNameTextFied.delegate = self
         userNameTextFied.simpleModifier()
     }
+    
+    func setupBackground(){
+        if let gradient = Settings.shared.gradientColor {
+            if let view = self.view as? GradientBackgroundView {
+                view.setGradientColor(gradient: gradient)
+            }
+        }
+    }
 }
 
 //MARK: Selectors and Actions
 extension StartViewController{
     @objc
     func tapEnterButton(){
+        guard let inputText = userNameTextFied.text, !inputText.isEmpty  else {return}
         saveUserName()
         hideElements()
     }
@@ -79,11 +93,7 @@ extension StartViewController{
 extension StartViewController {
     
     func hideElements(){
-//        scrollView.subviews.forEach({$0.hideAnimation()})
-       // pageControl.hideAnimation()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.goToMenuViewController()
-//        }
+        self.goToMenuViewController()
     }
 }
 

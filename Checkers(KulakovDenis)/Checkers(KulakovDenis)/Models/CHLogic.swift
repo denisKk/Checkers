@@ -17,19 +17,19 @@ enum Direction: Int {
     case bottomRight
     
     var rawValue: Int {
-            get {
-                switch self {
-                case .topLeft:
-                    return BOARD_SIZE - 1
-                case .topRight:
-                    return BOARD_SIZE + 1
-                case .bottomLeft:
-                    return -1 * (BOARD_SIZE + 1)
-                case .bottomRight:
-                    return -1 * (BOARD_SIZE - 1)
-                }
+        get {
+            switch self {
+            case .topLeft:
+                return BOARD_SIZE - 1
+            case .topRight:
+                return BOARD_SIZE + 1
+            case .bottomLeft:
+                return -1 * (BOARD_SIZE + 1)
+            case .bottomRight:
+                return -1 * (BOARD_SIZE - 1)
             }
         }
+    }
     
     
     static var allDirections: [Direction] {
@@ -43,7 +43,7 @@ enum Direction: Int {
     static var bottomDirections: [Direction] {
         [.bottomLeft, .bottomRight]
     }
-
+    
     
     func otherDirections() -> [Direction] {
         Direction.allDirections.filter {$0 != self.contrDirection()}
@@ -61,7 +61,7 @@ enum Direction: Int {
             return .topLeft
         }
     }
-
+    
     
 }
 

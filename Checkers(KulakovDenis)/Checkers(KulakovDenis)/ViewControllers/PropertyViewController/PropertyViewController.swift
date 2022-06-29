@@ -34,6 +34,7 @@ extension PropertyViewController {
         setupTextField()
         setupButtons()
         loadData()
+        setupSegmentedControl()
     }
     
     func loadData(){
@@ -42,6 +43,13 @@ extension PropertyViewController {
                 view.setGradientColor(gradient: gradient)
             }
         }
+    }
+    
+    func setupSegmentedControl(){
+        boardSizeSegment.selectedSegmentTintColor = (self.view as? GradientBackgroundView)?.startColor ?? .orange
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        boardSizeSegment.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        boardSizeSegment.setTitleTextAttributes(titleTextAttributes, for: .selected)
     }
     
     func setupPickers(){
@@ -121,6 +129,9 @@ extension PropertyViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         TimeType.allCases[row].description()
     }
     
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: TimeType.allCases[row].description(), attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+    }
 
 }
 

@@ -17,7 +17,7 @@
 "Enter" = "Увайсці";
 "Hello" = "Добры дзень";
 "Cancel" = "Адмяніць";
-"Edit avatar" = "Рэдагаваць аватар";
+"Edit avatar" = "Змянiць аватар";
 "Delete" = "Выдаліць";
 "Two players" = "Два гульца";
 "History" = "Гісторыя";
@@ -25,9 +25,9 @@
 "A draw" = "Нічыя";
 "offers a draw. Are you agree?" = "прапануе нічыю. Вы згодныя?";
 "Agree" = "Згодзен";
-"Continue" = "Працягваць гульню";
-"Game played to a draw" = "Гульня згуляная ўнічыю";
-"is winner" = "з'яўляецца пераможцам";
+"Continue" = "Не";
+"Game played to a draw" = "Партыя згуляная ўнічыю";
+"is winner" = "выiграл";
 "Finish game" = "Гульня скончана";
 "Exit" = "Выхад";
 "Rematch" = "Матч-рэванш";

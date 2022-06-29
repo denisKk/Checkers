@@ -24,6 +24,7 @@ class LanguageTableViewCell: UITableViewCell {
         collectionView.register(UINib.init(nibName: "LanguageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LanguageCollectionViewCell")
     }
     
+    
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //
@@ -39,7 +40,9 @@ extension LanguageTableViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LanguageCollectionViewCell", for: indexPath) as? LanguageCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setup(with: dataArray[indexPath.item])
+        
+        let isBorder = Settings.shared.currentLanguageCode == dataArray[indexPath.item]
+        cell.setup(with: dataArray[indexPath.item], bordered: isBorder)
         return cell
     }
     

@@ -27,8 +27,8 @@
 "Agree" = "Соглашаюсь";
 "Continue" = "Продолжить";
 "Game played to a draw" = "Игра сыграна вничью";
-"is winner" = "победитель";
-"Finish game" = "Закончить игру";
+"is winner" = "выиграл";
+"Finish game" = "Игра закончена";
 "Exit" = "Выход";
 "Rematch" = "Реванш";
 "Game parametrs" = "Параметры игры";
