@@ -19,7 +19,21 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e76-r8-7BU" customClass="GradientBackgroundView" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="61e-Si-Kqe">
+                                <rect key="frame" x="8" y="157.5" width="35" height="34"/>
+                                <color key="tintColor" red="0.0" green="0.83921568629999999" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Iz2-cd-4Z0"/>
+                                    <constraint firstAttribute="width" constant="35" id="xTq-eO-89i"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="61e-Si-Kqe" firstAttribute="leading" secondItem="e76-r8-7BU" secondAttribute="leading" constant="8" id="obJ-Ym-do1"/>
+                            <constraint firstAttribute="bottom" secondItem="61e-Si-Kqe" secondAttribute="bottom" constant="8" id="pvd-zq-PDK"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -31,12 +45,14 @@
             </constraints>
             <size key="customSize" width="220" height="406"/>
             <connections>
-                <outlet property="gradientView" destination="e76-r8-7BU" id="ycn-fz-U1L"/>
+                <outlet property="checkmarkImage" destination="61e-Si-Kqe" id="dUM-j0-qGu"/>
+                <outlet property="gradientView" destination="e76-r8-7BU" id="PKx-MD-Udq"/>
             </connections>
             <point key="canvasLocation" x="60.869565217391312" y="94.419642857142847"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

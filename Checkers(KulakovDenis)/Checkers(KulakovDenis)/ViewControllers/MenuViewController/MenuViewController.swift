@@ -10,10 +10,10 @@ import GoogleMobileAds
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var startGameButton: UIView!
-    @IBOutlet weak var scoreButton: UIView!
-    @IBOutlet weak var settingsButton: UIView!
-    @IBOutlet weak var infoButton: UIView!
+    @IBOutlet weak var startGameButton: BorderButton!
+    @IBOutlet weak var scoreButton: BorderButton!
+    @IBOutlet weak var settingsButton: BorderButton!
+    @IBOutlet weak var infoButton: BorderButton!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     
@@ -21,31 +21,42 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        setupUI()
-        
+        loadData()
+        setupActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadData()
+        super.viewWillAppear(animated)
+        setupUI()
     }
     
-    func setupUI(){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupImageView()
-        setupButtons()
     }
-    
-    func loadData(){
-        userNameLabel.text = Settings.shared.userName
-        avatarImageView.image = Settings.shared.avatar
+
+    func setupUI(){
+        setupButtons()
         if let gradient = Settings.shared.gradientColor {
             if let view = self.view as? GradientBackgroundView {
                 view.setGradientColor(gradient: gradient)
             }
         }
+    }
+    
+    func loadData(){
+        userNameLabel.text = Settings.shared.userName
+        avatarImageView.image = Settings.shared.avatar
+    }
+    
+    @IBAction func logoutButtonTap(_ sender: Any) {
+        Settings.shared.logOut()
+        CoreDataManager.shared.clearDataBase()
+        guard let startVC = StartViewController.getInstanceViewController as? StartViewController
+        else {return}
+
+        UIApplication.shared.windows.first?.rootViewController = startVC
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
     
     func goToGameViewController(){
@@ -58,7 +69,6 @@ class MenuViewController: UIViewController {
         guard let vc = SettingsViewController.getInstanceViewController as? SettingsViewController
         else {return}
         vc.modalPresentationStyle = .fullScreen
-        vc.title = "Settings"
         navigationController?.present(vc, animated: true)
     }
     
@@ -66,8 +76,13 @@ class MenuViewController: UIViewController {
         guard let vc = ScoreViewController.getInstanceViewController as? ScoreViewController
         else {return}
         vc.modalPresentationStyle = .fullScreen
-        vc.title = "Score"
         navigationController?.present(vc, animated: true)
+    }
+    
+    func goToPropertyViewController(){
+        guard let vc = PropertyViewController.getInstanceViewController as? PropertyViewController
+        else {return}
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func loadInterstitialView() {
@@ -102,6 +117,13 @@ extension MenuViewController {
     }
     
     func setupButtons(){
+        startGameButton.caption = "Two players".localized
+        scoreButton.caption = "History".localized
+        settingsButton.caption = "Settings".localized
+        infoButton.caption = "Info".localized
+    }
+    
+    func setupActions(){
         startGameButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapStartGameButton)))
         
         settingsButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapSettingsButton)))
@@ -116,24 +138,24 @@ extension MenuViewController{
     func tapStartGameButton(){
         
         if Settings.shared.chessArray != nil {
-            let alert = UIAlertController(title: "Hello", message: "You have a saved game. Are you continue or start new game?", preferredStyle: .alert)
-            let newGame = UIAlertAction(title: "New game", style: .cancel, handler: {_ in
+            let alert = UIAlertController(title: "Hello".localized, message: "You have a saved game. Are you continue or start new game?".localized, preferredStyle: .alert)
+            let newGame = UIAlertAction(title: "New game".localized, style: .cancel, handler: {_ in
                 Settings.shared.resetData()
-               // self.goToGameViewController()
-                self.loadInterstitialView()
+                self.goToPropertyViewController()
+//                self.loadInterstitialView()
             })
             
-            let continueGame = UIAlertAction(title: "Continue", style: .default) { _ in
-               // self.goToGameViewController()
-                self.loadInterstitialView()
+            let continueGame = UIAlertAction(title: "Continue".localized, style: .default) { _ in
+                self.goToGameViewController()
+//                self.loadInterstitialView()
             }
             
             alert.addAction(newGame)
             alert.addAction(continueGame)
             present(alert, animated: true, completion: nil)
         } else {
-           // goToGameViewController()
-            loadInterstitialView()
+            goToPropertyViewController()
+//            loadInterstitialView()
         }
     }
     
@@ -151,9 +173,9 @@ extension MenuViewController{
     func tapAvatarImageView(_ sender: Any) {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         
-        let changeAvatar = UIAlertAction(title: "Edit avatar", style: .default) { _ in
+        let changeAvatar = UIAlertAction(title: "Edit avatar".localized, style: .default) { _ in
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
             pickerController.allowsEditing = true
@@ -163,7 +185,7 @@ extension MenuViewController{
         alert.addAction(cancel)
         alert.addAction(changeAvatar)
         
-        let removeAvatar = UIAlertAction(title: "Delete", style: .destructive) { _ in
+        let removeAvatar = UIAlertAction(title: "Delete".localized, style: .destructive) { _ in
             Settings.shared.avatar = nil
             self.avatarImageView.image = UIImage(named: "avatar")
         }

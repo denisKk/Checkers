@@ -15,6 +15,25 @@
 		B8436F0727CE63A800947EF2 /* ScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8436F0527CE63A800947EF2 /* ScoreTableViewCell.xib */; };
 		B8436F0927CE70E700947EF2 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8436F0827CE70E700947EF2 /* ScoreViewController.swift */; };
 		B8436F0B27CE70FE00947EF2 /* ScoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8436F0A27CE70FE00947EF2 /* ScoreViewController.storyboard */; };
+		B847FD03286A67190076967E /* HistoryGamesDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B847FD01286A67190076967E /* HistoryGamesDB.xcdatamodeld */; };
+		B847FD16286AFE5E0076967E /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD15286AFE5E0076967E /* GameHistory.swift */; };
+		B847FD1B286B00270076967E /* PlayersDataDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD17286B00270076967E /* PlayersDataDB+CoreDataProperties.swift */; };
+		B847FD1C286B00270076967E /* GamesDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD18286B00270076967E /* GamesDB+CoreDataProperties.swift */; };
+		B847FD1D286B00270076967E /* GamesDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD19286B00270076967E /* GamesDB+CoreDataClass.swift */; };
+		B847FD1E286B00270076967E /* PlayersDataDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD1A286B00270076967E /* PlayersDataDB+CoreDataClass.swift */; };
+		B847FD20286B00690076967E /* PlayerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD1F286B00690076967E /* PlayerHistory.swift */; };
+		B847FD22286B02420076967E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B847FD21286B02420076967E /* CoreDataManager.swift */; };
+		B858213A286463BC00D02D03 /* UserPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8582139286463BC00D02D03 /* UserPanelView.swift */; };
+		B858213D286463E100D02D03 /* UserPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B858213C286463E100D02D03 /* UserPanelView.xib */; };
+		B85821452864DA3500D02D03 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85821442864DA3500D02D03 /* Int.swift */; };
+		B85821482865043C00D02D03 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85821472865043C00D02D03 /* PropertyViewController.swift */; };
+		B858214A2865045100D02D03 /* PropertyViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B85821492865045100D02D03 /* PropertyViewController.storyboard */; };
+		B88826F6286B9B7100831F73 /* String + CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88826F5286B9B7100831F73 /* String + CoreKit.swift */; };
+		B88826FA286BAD8000831F73 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88826F8286BAD8000831F73 /* LanguageTableViewCell.swift */; };
+		B88826FB286BAD8000831F73 /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88826F9286BAD8000831F73 /* LanguageTableViewCell.xib */; };
+		B88826FF286BAE9A00831F73 /* LanguageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88826FD286BAE9A00831F73 /* LanguageCollectionViewCell.swift */; };
+		B8882700286BAE9A00831F73 /* LanguageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88826FE286BAE9A00831F73 /* LanguageCollectionViewCell.xib */; };
+		B8882705286BB52600831F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8882707286BB52600831F73 /* Localizable.strings */; };
 		B8FDE71F27C5769A0087F33C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE71E27C5769A0087F33C /* AppDelegate.swift */; };
 		B8FDE72127C5769A0087F33C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE72027C5769A0087F33C /* SceneDelegate.swift */; };
 		B8FDE72827C5769C0087F33C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE72727C5769C0087F33C /* Assets.xcassets */; };
@@ -57,18 +76,41 @@
 		B8436F0527CE63A800947EF2 /* ScoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScoreTableViewCell.xib; sourceTree = "<group>"; };
 		B8436F0827CE70E700947EF2 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		B8436F0A27CE70FE00947EF2 /* ScoreViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScoreViewController.storyboard; sourceTree = "<group>"; };
+		B847FD02286A67190076967E /* HistoryGamesDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HistoryGamesDB.xcdatamodel; sourceTree = "<group>"; };
+		B847FD15286AFE5E0076967E /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
+		B847FD17286B00270076967E /* PlayersDataDB+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlayersDataDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B847FD18286B00270076967E /* GamesDB+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GamesDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B847FD19286B00270076967E /* GamesDB+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GamesDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B847FD1A286B00270076967E /* PlayersDataDB+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PlayersDataDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B847FD1F286B00690076967E /* PlayerHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHistory.swift; sourceTree = "<group>"; };
+		B847FD21286B02420076967E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B8582139286463BC00D02D03 /* UserPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPanelView.swift; sourceTree = "<group>"; };
+		B858213C286463E100D02D03 /* UserPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserPanelView.xib; sourceTree = "<group>"; };
+		B85821442864DA3500D02D03 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		B85821472865043C00D02D03 /* PropertyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyViewController.swift; sourceTree = "<group>"; };
+		B85821492865045100D02D03 /* PropertyViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PropertyViewController.storyboard; sourceTree = "<group>"; };
+		B88826F5286B9B7100831F73 /* String + CoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + CoreKit.swift"; sourceTree = "<group>"; };
+		B88826F8286BAD8000831F73 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
+		B88826F9286BAD8000831F73 /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
+		B88826FD286BAE9A00831F73 /* LanguageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B88826FE286BAE9A00831F73 /* LanguageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8882706286BB52600831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B888270E286BB5AE00831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/StartViewController.storyboard; sourceTree = "<group>"; };
+		B8882710286BB5D300831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B8882711286BB60400831F73 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8882712286BB60400831F73 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B8882713286BB82300831F73 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8882714286BB82300831F73 /* be */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = be; path = be.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FDE71B27C5769A0087F33C /* Checkers(KulakovDenis).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkers(KulakovDenis).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FDE71E27C5769A0087F33C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FDE72027C5769A0087F33C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B8FDE72727C5769C0087F33C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B8FDE72A27C5769C0087F33C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FDE72C27C5769C0087F33C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8FDE73327C576E50087F33C /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		B8FDE73427C576E50087F33C /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		B8FDE73527C576E50087F33C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + CoreKit.swift"; sourceTree = "<group>"; };
 		B8FDE73727C576E50087F33C /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		B8FDE74327C5772F0087F33C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/StartViewController.storyboard; sourceTree = "<group>"; };
 		B8FDE74427C5772F0087F33C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B8FDE74E27C577450087F33C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8FDE75227C57D690087F33C /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
@@ -125,6 +167,7 @@
 				B83D4B1A284001F800688464 /* CHLogic.swift */,
 				B83D4B1D2840039800688464 /* Game.swift */,
 				B83D4B1F2840321200688464 /* Player.swift */,
+				B847FD04286A6A260076967E /* CoreDataModeles */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,6 +188,63 @@
 				B8436F0A27CE70FE00947EF2 /* ScoreViewController.storyboard */,
 			);
 			path = ScoreViewController;
+			sourceTree = "<group>";
+		};
+		B847FD04286A6A260076967E /* CoreDataModeles */ = {
+			isa = PBXGroup;
+			children = (
+				B847FD19286B00270076967E /* GamesDB+CoreDataClass.swift */,
+				B847FD18286B00270076967E /* GamesDB+CoreDataProperties.swift */,
+				B847FD1A286B00270076967E /* PlayersDataDB+CoreDataClass.swift */,
+				B847FD17286B00270076967E /* PlayersDataDB+CoreDataProperties.swift */,
+				B847FD15286AFE5E0076967E /* GameHistory.swift */,
+				B847FD1F286B00690076967E /* PlayerHistory.swift */,
+			);
+			path = CoreDataModeles;
+			sourceTree = "<group>";
+		};
+		B858213B286463C900D02D03 /* UserPanelView */ = {
+			isa = PBXGroup;
+			children = (
+				B8582139286463BC00D02D03 /* UserPanelView.swift */,
+				B858213C286463E100D02D03 /* UserPanelView.xib */,
+			);
+			path = UserPanelView;
+			sourceTree = "<group>";
+		};
+		B8582146286503C900D02D03 /* PropertyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B85821472865043C00D02D03 /* PropertyViewController.swift */,
+				B85821492865045100D02D03 /* PropertyViewController.storyboard */,
+			);
+			path = PropertyViewController;
+			sourceTree = "<group>";
+		};
+		B88826F7286BAD3700831F73 /* LanguageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B88826F8286BAD8000831F73 /* LanguageTableViewCell.swift */,
+				B88826F9286BAD8000831F73 /* LanguageTableViewCell.xib */,
+			);
+			path = LanguageTableViewCell;
+			sourceTree = "<group>";
+		};
+		B88826FC286BAE6900831F73 /* LanguageCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B88826FD286BAE9A00831F73 /* LanguageCollectionViewCell.swift */,
+				B88826FE286BAE9A00831F73 /* LanguageCollectionViewCell.xib */,
+			);
+			path = LanguageCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		B8882702286BB50000831F73 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				B8882707286BB52600831F73 /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		B8FDE71227C5769A0087F33C = {
@@ -179,8 +279,10 @@
 				B8FDE73D27C5772F0087F33C /* ViewControllers */,
 				B8FDE73227C576E50087F33C /* Extentions */,
 				B8FDE72727C5769C0087F33C /* Assets.xcassets */,
+				B8882702286BB50000831F73 /* Localization */,
 				B8FDE72927C5769C0087F33C /* LaunchScreen.storyboard */,
 				B8FDE72C27C5769C0087F33C /* Info.plist */,
+				B847FD01286A67190076967E /* HistoryGamesDB.xcdatamodeld */,
 				B83D4B1728329AF400688464 /* GoogleService-Info.plist */,
 			);
 			path = "Checkers(KulakovDenis)";
@@ -195,6 +297,8 @@
 				B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */,
 				B8FDE73727C576E50087F33C /* UILabel.swift */,
 				B8FDE75427C584400087F33C /* UITextField.swift */,
+				B88826F5286B9B7100831F73 /* String + CoreKit.swift */,
+				B85821442864DA3500D02D03 /* Int.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -206,6 +310,7 @@
 				B8FDE75C27C59B540087F33C /* MenuViewController */,
 				B8FDE76C27C853530087F33C /* SettingsViewController */,
 				B8FDE76427C5B6440087F33C /* GameViewController */,
+				B8582146286503C900D02D03 /* PropertyViewController */,
 				B8436F0C27CE710600947EF2 /* ScoreViewController */,
 			);
 			path = ViewControllers;
@@ -259,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				B8FDE76227C59C240087F33C /* Settings.swift */,
+				B847FD21286B02420076967E /* CoreDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -276,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				B8FDE76927C643140087F33C /* ChessView.swift */,
+				B858213B286463C900D02D03 /* UserPanelView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +399,8 @@
 		B8FDE77127C9163C0087F33C /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				B88826FC286BAE6900831F73 /* LanguageCollectionViewCell */,
+				B88826F7286BAD3700831F73 /* LanguageTableViewCell */,
 				B8436F0327CE637100947EF2 /* ScoreCell */,
 				B8FDE78127C91B190087F33C /* GradientTableViewCell */,
 				B8FDE77527C9163C0087F33C /* GradientCollectionViewCell */,
@@ -360,7 +469,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ru,
+				be,
 			);
 			mainGroup = B8FDE71227C5769A0087F33C;
 			productRefGroup = B8FDE71C27C5769A0087F33C /* Products */;
@@ -377,13 +487,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8882705286BB52600831F73 /* Localizable.strings in Resources */,
 				B8436F0727CE63A800947EF2 /* ScoreTableViewCell.xib in Resources */,
 				B8FDE77027C853910087F33C /* SettingsViewController.storyboard in Resources */,
 				B8FDE78527C91B190087F33C /* BackgroundGradientTableViewCell.xib in Resources */,
 				B8436F0B27CE70FE00947EF2 /* ScoreViewController.storyboard in Resources */,
+				B858213D286463E100D02D03 /* UserPanelView.xib in Resources */,
 				B8FDE74A27C5772F0087F33C /* StartViewController.storyboard in Resources */,
+				B858214A2865045100D02D03 /* PropertyViewController.storyboard in Resources */,
 				B83D4B1828329AF400688464 /* GoogleService-Info.plist in Resources */,
+				B88826FB286BAD8000831F73 /* LanguageTableViewCell.xib in Resources */,
 				B8FDE72B27C5769C0087F33C /* LaunchScreen.storyboard in Resources */,
+				B8882700286BAE9A00831F73 /* LanguageCollectionViewCell.xib in Resources */,
 				B8FDE72827C5769C0087F33C /* Assets.xcassets in Resources */,
 				B8FDE76727C5B6440087F33C /* GameViewController.storyboard in Resources */,
 				B8FDE75B27C589F90087F33C /* BorderButton.xib in Resources */,
@@ -441,29 +556,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B847FD03286A67190076967E /* HistoryGamesDB.xcdatamodeld in Sources */,
 				B8FDE73B27C576E50087F33C /* UIViewController + CoreKit.swift in Sources */,
+				B85821452864DA3500D02D03 /* Int.swift in Sources */,
 				B8FDE74F27C577450087F33C /* Constants.swift in Sources */,
 				B8FDE71F27C5769A0087F33C /* AppDelegate.swift in Sources */,
 				B8FDE75A27C589F90087F33C /* BorderButton.swift in Sources */,
+				B88826FA286BAD8000831F73 /* LanguageTableViewCell.swift in Sources */,
+				B847FD16286AFE5E0076967E /* GameHistory.swift in Sources */,
 				B83D4B202840321200688464 /* Player.swift in Sources */,
 				B8FDE76327C59C240087F33C /* Settings.swift in Sources */,
 				B8FDE75527C584400087F33C /* UITextField.swift in Sources */,
 				B8FDE78427C91B190087F33C /* BackgroundGradientTableViewCell.swift in Sources */,
+				B847FD1C286B00270076967E /* GamesDB+CoreDataProperties.swift in Sources */,
 				B8FDE73C27C576E50087F33C /* UILabel.swift in Sources */,
+				B847FD1D286B00270076967E /* GamesDB+CoreDataClass.swift in Sources */,
 				B8FDE77D27C9163C0087F33C /* BackgroundGradientCollectionViewCell.swift in Sources */,
+				B847FD1E286B00270076967E /* PlayersDataDB+CoreDataClass.swift in Sources */,
 				B8FDE75327C57D690087F33C /* GradientBackgroundView.swift in Sources */,
 				B8436F0627CE63A800947EF2 /* ScoreTableViewCell.swift in Sources */,
 				B83D4B1B284001F800688464 /* CHLogic.swift in Sources */,
+				B88826FF286BAE9A00831F73 /* LanguageCollectionViewCell.swift in Sources */,
 				B8FDE76027C59B540087F33C /* MenuViewController.swift in Sources */,
 				B8FDE73927C576E50087F33C /* Array.swift in Sources */,
+				B85821482865043C00D02D03 /* PropertyViewController.swift in Sources */,
 				B8FDE76827C5B6440087F33C /* GameViewController.swift in Sources */,
+				B847FD20286B00690076967E /* PlayerHistory.swift in Sources */,
 				B8436F0927CE70E700947EF2 /* ScoreViewController.swift in Sources */,
+				B858213A286463BC00D02D03 /* UserPanelView.swift in Sources */,
+				B847FD1B286B00270076967E /* PlayersDataDB+CoreDataProperties.swift in Sources */,
 				B8FDE76A27C643150087F33C /* ChessView.swift in Sources */,
+				B88826F6286B9B7100831F73 /* String + CoreKit.swift in Sources */,
 				B8FDE76E27C853860087F33C /* SettingsViewController.swift in Sources */,
 				B8FDE74B27C5772F0087F33C /* StartViewController.swift in Sources */,
 				B8FDE73827C576E50087F33C /* UIView.swift in Sources */,
 				B8FDE72127C5769A0087F33C /* SceneDelegate.swift in Sources */,
 				B8FDE73A27C576E50087F33C /* UIColor.swift in Sources */,
+				B847FD22286B02420076967E /* CoreDataManager.swift in Sources */,
 				B83D4B1E2840039800688464 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,10 +600,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		B8882707286BB52600831F73 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8882706286BB52600831F73 /* en */,
+				B8882711286BB60400831F73 /* ru */,
+				B8882713286BB82300831F73 /* be */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B8FDE72927C5769C0087F33C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B8FDE72A27C5769C0087F33C /* Base */,
+				B8882710286BB5D300831F73 /* en */,
+				B8882712286BB60400831F73 /* ru */,
+				B8882714286BB82300831F73 /* be */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -482,7 +623,7 @@
 		B8FDE74227C5772F0087F33C /* StartViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B8FDE74327C5772F0087F33C /* Base */,
+				B888270E286BB5AE00831F73 /* en */,
 			);
 			name = StartViewController.storyboard;
 			sourceTree = "<group>";
@@ -494,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -555,6 +697,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -617,7 +760,7 @@
 				DEVELOPMENT_TEAM = 6464RAB4U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Checkers(KulakovDenis)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Kulakov Checkers";
+				INFOPLIST_KEY_CFBundleDisplayName = Checkers;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -647,7 +790,7 @@
 				DEVELOPMENT_TEAM = 6464RAB4U4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Checkers(KulakovDenis)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Kulakov Checkers";
+				INFOPLIST_KEY_CFBundleDisplayName = Checkers;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -688,6 +831,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B847FD01286A67190076967E /* HistoryGamesDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B847FD02286A67190076967E /* HistoryGamesDB.xcdatamodel */,
+			);
+			currentVersion = B847FD02286A67190076967E /* HistoryGamesDB.xcdatamodel */;
+			path = HistoryGamesDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B8FDE71327C5769A0087F33C /* Project object */;
 }

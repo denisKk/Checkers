@@ -12,16 +12,17 @@ import UIKit
 class
 BackgroundGradientCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var checkmarkImage: UIImageView!
     @IBOutlet weak var gradientView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = .red
     }
     
-    func setup(with colors: (UIColor, UIColor)) {
+    func setup(with colors: (UIColor, UIColor), check: Bool) {
         if let view = gradientView as? GradientBackgroundView {
             view.startColor = colors.0
             view.endColor = colors.1
         }
+        checkmarkImage.isHidden = !check
     }
 }

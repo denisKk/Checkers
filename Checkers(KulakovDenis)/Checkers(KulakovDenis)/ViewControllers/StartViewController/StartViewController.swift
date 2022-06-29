@@ -39,10 +39,11 @@ class StartViewController: UIViewController {
     }
     
     func goToMenuViewController(){
-        guard let nvc = MenuViewController.getInstanceViewController as? UINavigationController
+        guard let menuVC = MenuViewController.getInstanceViewController as? UINavigationController
         else {return}
-        nvc.modalPresentationStyle = .fullScreen
-        present(nvc, animated: false, completion: nil)
+
+        UIApplication.shared.windows.first?.rootViewController = menuVC
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
 }
 
@@ -78,11 +79,11 @@ extension StartViewController{
 extension StartViewController {
     
     func hideElements(){
-        scrollView.subviews.forEach({$0.hideAnimation()})
-        pageControl.hideAnimation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//        scrollView.subviews.forEach({$0.hideAnimation()})
+       // pageControl.hideAnimation()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.goToMenuViewController()
-        }
+//        }
     }
 }
 

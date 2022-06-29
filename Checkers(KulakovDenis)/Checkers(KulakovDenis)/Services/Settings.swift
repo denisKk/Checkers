@@ -8,6 +8,20 @@
 import Foundation
 import UIKit
 
+enum BoardSize: Int {
+    case size8x8 = 8
+    case size10x10 = 10
+    
+    func description() -> String {
+        switch self {
+        case .size8x8:
+            return " 8x8 "
+        case .size10x10:
+           return " 10x10 "
+        }
+    }
+}
+
 class Settings: NSObject {
     
     static let shared = Settings()
@@ -20,13 +34,38 @@ class Settings: NSObject {
         case gameTimeInSeconds
         case startGradientColor
         case endGradientColor
+        case boardSize
+        case timeLimit
+        case secondPlayerName
+        case topPlayerTime
+        case bottomPlayerTime
+        case language
     }
     
+    let languageCodes = ["en", "be", "ru"]
    
     
     override init() {
         isEmptyAvatar = UserDefaults.standard.data(forKey: UserDefaultsKeys.avatar.rawValue) == nil
         super.init()
+    }
+    
+    var timeLimit: TimeType {
+        get {
+            return TimeType(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.timeLimit.rawValue)) ?? .unlimit
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.timeLimit.rawValue)
+        }
+    }
+    
+    var boardSize: BoardSize {
+        get {
+            return BoardSize(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.boardSize.rawValue)) ?? .size8x8
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.boardSize.rawValue)
+        }
     }
     
     var userName: String? {
@@ -35,6 +74,15 @@ class Settings: NSObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.userName.rawValue)
+        }
+    }
+    
+    var secondPlayerName: String? {
+        get{
+            return UserDefaults.standard.string(forKey: UserDefaultsKeys.secondPlayerName.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.secondPlayerName.rawValue)
         }
     }
     
@@ -48,10 +96,24 @@ class Settings: NSObject {
     }
     
     func resetData(){
-        //    UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userName.rawValue)
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.boardSize.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timeLimit.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.topPlayerTime.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.bottomPlayerTime.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.currentStep.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.chessArray.rawValue)
+    }
+    
+    func rematchData(){
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.topPlayerTime.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.bottomPlayerTime.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.chessArray.rawValue)
+    }
+    
+    func logOut(){
+        resetData()
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userName.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.avatar.rawValue)
     }
     
     var isEmptyAvatar: Bool
@@ -86,12 +148,21 @@ class Settings: NSObject {
         }
     }
     
-    var gameTimeInSeconds: Int {
+    var topPlayerTime: Int {
         set {
-            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue)
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.topPlayerTime.rawValue)
         }
         get {
-            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.gameTimeInSeconds.rawValue) 
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.topPlayerTime.rawValue)
+        }
+    }
+    
+    var bottomPlayerTime: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.bottomPlayerTime.rawValue)
+        }
+        get {
+            return UserDefaults.standard.integer(forKey: UserDefaultsKeys.bottomPlayerTime.rawValue)
         }
     }
     
@@ -126,6 +197,29 @@ class Settings: NSObject {
             }
             
             return (firstColor, secondColor)
+        }
+    }
+    
+    var currentLanguageCode: String {
+        set {
+            if let index = languageCodes.firstIndex(of: newValue) {
+                UserDefaults.standard.set(index, forKey: UserDefaultsKeys.language.rawValue)
+            }
+            
+            if let window = UIApplication.shared.windows.first?.rootViewController?.view {
+                let subviews = window.subviews
+
+                subviews.forEach { subView in
+                    subView.removeFromSuperview()
+                    window.addSubview(subView)
+                }
+            }
+//            NotificationCenter.default.post(name: NSNotification.Name("LanguageDidChange"), object: nil)
+        }
+        
+        get {
+            let indexCode = UserDefaults.standard.integer(forKey: UserDefaultsKeys.language.rawValue)
+            return languageCodes[indexCode]
         }
     }
 }

@@ -9,9 +9,11 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var userClickGradient: (((UIColor, UIColor)) -> ())?
+    var userClickLanguage: ((String) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,20 +22,32 @@ class SettingsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "BackgroundGradientTableViewCell", bundle: nil), forCellReuseIdentifier: "BackgroundGradientTableViewCell")
+        tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
         
         loadData()
         
-        userClickGradient = { (gradient) in
-            if let view = self.view as? GradientBackgroundView {
+        userClickGradient = { [weak self] (gradient) in
+            if let view = self?.view as? GradientBackgroundView {
                 view.setGradientColor(gradient: gradient)
             }
             Settings.shared.gradientColor = gradient
+            self?.tableView.reloadData()
+        }
+        
+        userClickLanguage = { languageCode in
+            Settings.shared.currentLanguageCode = languageCode
+            self.tableView.reloadData()
+            self.setupUI()
         }
     }
 
     
     @IBAction func closeButtonTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func setupUI(){
+        titleLabel.text = "Settings".localized
     }
     
     func loadData(){
@@ -53,20 +67,37 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BackgroundGradientTableViewCell", for: indexPath) as? BackgroundGradientTableViewCell else {
-            return UITableViewCell()
+        
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "BackgroundGradientTableViewCell", for: indexPath) as? BackgroundGradientTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.userClickGradient = userClickGradient
+            if let view = self.view as? GradientBackgroundView, let startColor = view.startColor, let endColor = view.endColor {
+                cell.viewGradient = (startColor, endColor)
+            }
+            return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as? LanguageTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.userClickLanguage = userClickLanguage
+            return cell
+        default: return UITableViewCell()
         }
-        cell.userClickGradient = userClickGradient
-        return cell
+        
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return "Background Gradients"
+        case 0: return "Background Gradients".localized
+        case 1: return "Languages".localized
         default:
             return ""
         }
@@ -88,6 +119,10 @@ extension SettingsViewController: UITableViewDataSource {
 extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        switch indexPath.section {
+        case 1: return 50
+        default:
+            return 200
+        }
     }
 }
