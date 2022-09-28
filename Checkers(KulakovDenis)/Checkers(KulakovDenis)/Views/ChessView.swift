@@ -34,16 +34,16 @@ enum ChessColor: String {
     func getSimpleChessType() -> ChessType {
         switch self {
         case .white:
-          return ChessType.white
+            return ChessType.white
         case .black:
-          return ChessType.black
+            return ChessType.black
         }
     }
 }
 
 class ChessView: UIView {
-
-  //  var color: ChessColor
+    
+    //  var color: ChessColor
     var type: ChessType
     var isQueen = false {
         didSet {
@@ -61,7 +61,9 @@ class ChessView: UIView {
         if let color = type.getChessColor() {
             self.backgroundColor = color.cgColor
             let alpha = (color == .white) ? 1 : 0.3
-            self.layer.borderColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1).withAlphaComponent(alpha).cgColor
+//            let alpha = 1.0
+            //            self.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 1).withAlphaComponent(alpha).cgColor
+            self.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1).withAlphaComponent(alpha).cgColor
         }
         
         self.layer.cornerRadius = width * scale / 2
@@ -85,9 +87,9 @@ class ChessView: UIView {
         imageView.contentMode = .scaleAspectFit
         
         //UIView.transition(with: cellView, duration: 1, options: .transitionFlipFromLeft, animations: {
-            self.addSubview(imageView)
-            
-       // })
+        self.addSubview(imageView)
+        
+        // })
     }
     
     func showIn(view: UIView, showQueen: Bool = false, onCompletion: (() -> ())? = nil) {
@@ -102,7 +104,7 @@ class ChessView: UIView {
     }
     
     func border(show: Bool){
-        self.layer.borderWidth = show ? 2 : 0
+        self.layer.borderWidth = show ? 3 : 0
     }
-
+    
 }

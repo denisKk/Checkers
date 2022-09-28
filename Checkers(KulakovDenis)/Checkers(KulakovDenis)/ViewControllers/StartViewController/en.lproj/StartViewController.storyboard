@@ -13,28 +13,10 @@
         <scene sceneID="y3I-Ns-S4h">
             <objects>
                 <viewController id="ost-04-5IW" customClass="StartViewController" customModule="Checkers_KulakovDenis_" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="h1V-7g-H12">
+                    <view key="view" contentMode="scaleToFill" id="h1V-7g-H12" customClass="GradientBackgroundView" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGx-Id-hk9" customClass="GradientBackgroundView" customModule="Checkers_KulakovDenis_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" name="firstGradientColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" name="firstGradientColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" name="secondGradientColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
-                                        <point key="value" x="1" y="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
-                                        <point key="value" x="1" y="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="k4U-XY-tdQ">
                                 <rect key="frame" x="158.5" y="826" width="97" height="26"/>
                                 <color key="pageIndicatorTintColor" red="0.96862745098039216" green="0.97647058823529409" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -125,16 +107,12 @@
                         <viewLayoutGuide key="safeArea" id="RCY-jT-t7w"/>
                         <color key="backgroundColor" name="firstGradientColor"/>
                         <constraints>
-                            <constraint firstItem="ZGx-Id-hk9" firstAttribute="leading" secondItem="RCY-jT-t7w" secondAttribute="leading" id="2MD-Ds-BQA"/>
                             <constraint firstItem="UuI-oR-kMC" firstAttribute="top" secondItem="h1V-7g-H12" secondAttribute="top" id="5YN-KF-Z2h"/>
-                            <constraint firstItem="ZGx-Id-hk9" firstAttribute="top" secondItem="h1V-7g-H12" secondAttribute="top" id="5uU-TC-WIg"/>
-                            <constraint firstItem="RCY-jT-t7w" firstAttribute="trailing" secondItem="ZGx-Id-hk9" secondAttribute="trailing" id="BWg-dx-817"/>
                             <constraint firstItem="RCY-jT-t7w" firstAttribute="bottom" secondItem="k4U-XY-tdQ" secondAttribute="bottom" constant="10" id="DI1-EV-2I8"/>
                             <constraint firstItem="k4U-XY-tdQ" firstAttribute="centerX" secondItem="h1V-7g-H12" secondAttribute="centerX" id="IGn-1l-uzc"/>
                             <constraint firstItem="jAz-8r-Ytb" firstAttribute="height" secondItem="h1V-7g-H12" secondAttribute="height" id="Ji5-4S-2A6"/>
                             <constraint firstItem="jAz-8r-Ytb" firstAttribute="width" secondItem="h1V-7g-H12" secondAttribute="width" multiplier="2" id="api-gc-u1L"/>
                             <constraint firstItem="fWw-9B-j2a" firstAttribute="firstBaseline" secondItem="k4U-XY-tdQ" secondAttribute="firstBaseline" constant="-70" id="bRx-g9-CVl"/>
-                            <constraint firstAttribute="bottom" secondItem="ZGx-Id-hk9" secondAttribute="bottom" id="c8N-re-iox"/>
                             <constraint firstItem="2cj-JZ-XVd" firstAttribute="top" secondItem="RCY-jT-t7w" secondAttribute="top" constant="16" id="ha1-Qg-P2Q"/>
                             <constraint firstItem="jin-oh-7pb" firstAttribute="width" secondItem="h1V-7g-H12" secondAttribute="width" multiplier="0.75" id="lW2-bE-s7m"/>
                             <constraint firstItem="u9o-Ut-aK0" firstAttribute="width" secondItem="h1V-7g-H12" secondAttribute="width" multiplier="0.7" id="pVR-Ph-j1C"/>
@@ -142,6 +120,14 @@
                             <constraint firstAttribute="bottom" secondItem="UuI-oR-kMC" secondAttribute="bottom" id="wnv-Is-BXy"/>
                             <constraint firstItem="UuI-oR-kMC" firstAttribute="leading" secondItem="RCY-jT-t7w" secondAttribute="leading" id="yzO-mr-G6m"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" name="firstGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" name="secondGradientColor"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedTopBarMetrics"/>

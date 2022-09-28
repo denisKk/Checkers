@@ -107,6 +107,7 @@ class GameViewController: UIViewController {
     func setupPlayerPanels(){
         if let topPlayer = game.getPlayerBy(color: .black) {
             topPlayerView.setupWith(player: topPlayer)
+            topPlayerView.isFlipped = true
         }
         if let bottomPlayer = game.getPlayerBy(color: .white) {
             bottomPlayerView.setupWith(player: bottomPlayer)
@@ -256,13 +257,21 @@ extension GameViewController {
     func showAgreeAlert(playerName: String) {
         let alert = UIAlertController(title: "A draw".localized + "?", message: "\(playerName) " + "offers a draw. Are you agree?".localized, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Agree".localized, style: .default, handler: { _ in
-            
+            self.game.isDraw(agree: true)
         }))
         alert.addAction(UIAlertAction(title: "Continue".localized, style: .default, handler: { _ in
-           
+            self.game.isDraw(agree: false)
         }))
+        var angle = 0.0
+        if bottomPlayerView.player?.name == playerName {
+            angle = 90.0
+        }
         
-        self.present(alert, animated: true, completion: nil)
+        alert.view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2) * angle )
+        self.present(alert, animated: false, completion: nil)
+        
+        
+      //  self.present(alert, animated: true, completion: nil)
     }
     
      func showFinishGameAlertWith(winnerName: String?){
