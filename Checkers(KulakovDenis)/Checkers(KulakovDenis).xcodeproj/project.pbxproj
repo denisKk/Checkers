@@ -39,8 +39,6 @@
 		B8FDE72827C5769C0087F33C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE72727C5769C0087F33C /* Assets.xcassets */; };
 		B8FDE72B27C5769C0087F33C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE72927C5769C0087F33C /* LaunchScreen.storyboard */; };
 		B8FDE73827C576E50087F33C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73327C576E50087F33C /* UIView.swift */; };
-		B8FDE73927C576E50087F33C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73427C576E50087F33C /* Array.swift */; };
-		B8FDE73A27C576E50087F33C /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73527C576E50087F33C /* UIColor.swift */; };
 		B8FDE73B27C576E50087F33C /* UIViewController + CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */; };
 		B8FDE73C27C576E50087F33C /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73727C576E50087F33C /* UILabel.swift */; };
 		B8FDE74A27C5772F0087F33C /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE74227C5772F0087F33C /* StartViewController.storyboard */; };
@@ -107,8 +105,6 @@
 		B8FDE72727C5769C0087F33C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8FDE72C27C5769C0087F33C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8FDE73327C576E50087F33C /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		B8FDE73427C576E50087F33C /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		B8FDE73527C576E50087F33C /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + CoreKit.swift"; sourceTree = "<group>"; };
 		B8FDE73727C576E50087F33C /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		B8FDE74427C5772F0087F33C /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -292,8 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				B8FDE73327C576E50087F33C /* UIView.swift */,
-				B8FDE73427C576E50087F33C /* Array.swift */,
-				B8FDE73527C576E50087F33C /* UIColor.swift */,
 				B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */,
 				B8FDE73727C576E50087F33C /* UILabel.swift */,
 				B8FDE75427C584400087F33C /* UITextField.swift */,
@@ -578,7 +572,6 @@
 				B83D4B1B284001F800688464 /* CHLogic.swift in Sources */,
 				B88826FF286BAE9A00831F73 /* LanguageCollectionViewCell.swift in Sources */,
 				B8FDE76027C59B540087F33C /* MenuViewController.swift in Sources */,
-				B8FDE73927C576E50087F33C /* Array.swift in Sources */,
 				B85821482865043C00D02D03 /* PropertyViewController.swift in Sources */,
 				B8FDE76827C5B6440087F33C /* GameViewController.swift in Sources */,
 				B847FD20286B00690076967E /* PlayerHistory.swift in Sources */,
@@ -591,7 +584,6 @@
 				B8FDE74B27C5772F0087F33C /* StartViewController.swift in Sources */,
 				B8FDE73827C576E50087F33C /* UIView.swift in Sources */,
 				B8FDE72127C5769A0087F33C /* SceneDelegate.swift in Sources */,
-				B8FDE73A27C576E50087F33C /* UIColor.swift in Sources */,
 				B847FD22286B02420076967E /* CoreDataManager.swift in Sources */,
 				B83D4B1E2840039800688464 /* Game.swift in Sources */,
 			);

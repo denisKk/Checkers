@@ -250,7 +250,6 @@ class Game {
         Settings.shared.currentStep = currentStep?.color ?? .white
         Settings.shared.bottomPlayerTime = getPlayerBy(color: .white)?.time ?? 0
         Settings.shared.topPlayerTime = getPlayerBy(color: .black)?.time ?? 0
-        // Settings.shared.gameTimeInSeconds = gameTimeInSeconds
     }
     
     
@@ -328,10 +327,7 @@ class Game {
         }
         return false
     }
-    
-//    func getTagsByCurrrentColor() -> [Int] {
-//        getTags(by: currentStep!.color)
-//    }
+
     
     func getFreeCells(startTag: Int, direction: Direction) -> [Int] {
         var array = [Int]()
@@ -413,7 +409,7 @@ class Game {
         for direction in directions {
             newArray = array
             var nextTag = tag
-            if type.isQueen() {//}, array.isEmpty {
+            if type.isQueen() {
                 while getChessType(by: nextTag + direction.rawValue) == ChessType.none {
                     nextTag += direction.rawValue
                 }
@@ -423,7 +419,6 @@ class Game {
                 
                 let newTag = nextTag + 2 * direction.rawValue
                 let newDirections = direction.otherDirections()
-                
                 
                 
                 if type.isQueen() {

@@ -25,6 +25,11 @@ class MenuViewController: UIViewController {
         setupActions()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupImageView()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
@@ -32,7 +37,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupImageView()
+        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -191,6 +196,9 @@ extension MenuViewController{
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
             pickerController.allowsEditing = true
+            print(pickerController.viewControllers)
+//                        .filter { ($0 as? UINavigationBar) != nil }
+//                        .forEach { ($0 as? UINavigationBar)?.backgroundColor = UIColor.red }
             self.present(pickerController, animated: true, completion: nil)
         }
         

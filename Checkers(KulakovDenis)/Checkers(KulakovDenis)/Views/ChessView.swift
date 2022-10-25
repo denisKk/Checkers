@@ -61,8 +61,6 @@ class ChessView: UIView {
         if let color = type.getChessColor() {
             self.backgroundColor = color.cgColor
             let alpha = (color == .white) ? 1 : 0.3
-//            let alpha = 1.0
-            //            self.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 1).withAlphaComponent(alpha).cgColor
             self.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1).withAlphaComponent(alpha).cgColor
         }
         
