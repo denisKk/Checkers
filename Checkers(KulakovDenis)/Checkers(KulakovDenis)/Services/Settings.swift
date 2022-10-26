@@ -40,6 +40,7 @@ class Settings: NSObject {
         case topPlayerTime
         case bottomPlayerTime
         case language
+        case showAds
     }
     
     let languageCodes = ["en", "be", "ru"]
@@ -92,6 +93,15 @@ class Settings: NSObject {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.chessArray.rawValue)
+        }
+    }
+    
+    var showAds: Bool {
+        get{
+            return UserDefaults.standard.bool(forKey: UserDefaultsKeys.showAds.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKeys.showAds.rawValue)
         }
     }
     
@@ -214,7 +224,6 @@ class Settings: NSObject {
                     window.addSubview(subView)
                 }
             }
-//            NotificationCenter.default.post(name: NSNotification.Name("LanguageDidChange"), object: nil)
         }
         
         get {

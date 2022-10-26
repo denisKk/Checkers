@@ -23,14 +23,6 @@ class LanguageTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.register(UINib.init(nibName: "LanguageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LanguageCollectionViewCell")
     }
-    
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
 }
 
 
@@ -57,8 +49,6 @@ extension LanguageTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        userClickGradient?(gradientsArray[indexPath.item])
-//
         userClickLanguage?(dataArray[indexPath.item])
         collectionView.reloadData()
     }

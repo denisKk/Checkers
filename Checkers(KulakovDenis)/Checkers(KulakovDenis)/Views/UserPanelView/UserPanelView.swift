@@ -38,7 +38,7 @@ class UserPanelView: UIView {
     
     private func configurateView(){
         if isActive {
-            contentView.layer.borderWidth = 2
+            contentView.layer.borderWidth = 0.2
             flagButton.isEnabled = true
             handsButton.isEnabled = true
         } else {
@@ -105,7 +105,7 @@ class UserPanelView: UIView {
         self.addSubview(view)
         
         contentView.backgroundColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 0.1305618791)
-        contentView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 1).cgColor
+        contentView.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         flagButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapflagButton)))
         flagButton.isEnabled = false
         handsButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandsButton)))

@@ -66,21 +66,17 @@ class Game {
     func changeGameState(){
         switch state {
         case .none:
-            print("none state")
+            break
         case .start:
-            print("start state")
             startGame()
         case .play:
-            print("play state")
             startTimer()
         case .wait:
-            print("wait state")
+            break
         case .finish:
             finishGame()
         case .load:
-            
             loadLocalData()
-            
         }
     }
     
@@ -126,6 +122,7 @@ class Game {
     func finishGame(){
         gameTimer.invalidate()
         saveGameToBase()
+        Settings.shared.resetData()
     }
     
     func isDraw(agree: Bool){

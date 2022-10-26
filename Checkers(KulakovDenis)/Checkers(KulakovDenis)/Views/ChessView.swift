@@ -61,8 +61,6 @@ class ChessView: UIView {
         if let color = type.getChessColor() {
             self.backgroundColor = color.cgColor
             let alpha = (color == .white) ? 1 : 0.3
-//            let alpha = 1.0
-            //            self.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 1).withAlphaComponent(alpha).cgColor
             self.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1).withAlphaComponent(alpha).cgColor
         }
         
@@ -82,14 +80,12 @@ class ChessView: UIView {
         let imageView = UIImageView(frame: self.bounds)
         var imageColor = color
         imageColor.toggle()
-        imageView.image = UIImage(systemName: "sparkle")
-        imageView.tintColor = imageColor.cgColor.withAlphaComponent(0.8)
+        imageView.image = UIImage(named: "sun")
+        imageView.tintColor = imageColor.cgColor.withAlphaComponent(0.9)
         imageView.contentMode = .scaleAspectFit
-        
-        //UIView.transition(with: cellView, duration: 1, options: .transitionFlipFromLeft, animations: {
+
         self.addSubview(imageView)
-        
-        // })
+
     }
     
     func showIn(view: UIView, showQueen: Bool = false, onCompletion: (() -> ())? = nil) {

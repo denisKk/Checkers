@@ -269,12 +269,11 @@ extension GameViewController {
         
         alert.view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2) * angle )
         self.present(alert, animated: false, completion: nil)
-        
-        
-      //  self.present(alert, animated: true, completion: nil)
+
     }
     
      func showFinishGameAlertWith(winnerName: String?){
+         
          let message = winnerName == nil ? "Game played to a draw".localized : "\(winnerName ?? "") " + "is winner".localized
         
          let alert = UIAlertController(title: "Finish game".localized, message: message + "!", preferredStyle: .alert)
@@ -313,7 +312,6 @@ extension GameViewController {
             animationTimer.invalidate()
             if game.state == .load {
                 game.changeGameState(to: .start)
-                // printBordersIfCanStep()
             }
             return
         }

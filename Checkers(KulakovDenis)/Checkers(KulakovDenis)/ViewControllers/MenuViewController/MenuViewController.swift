@@ -23,16 +23,12 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         loadData()
         setupActions()
+        setupImageView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupImageView()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -45,6 +41,7 @@ class MenuViewController: UIViewController {
     
     func setupUI(){
         setupButtons()
+        setupAvatarCornerRadius()
         if let gradient = Settings.shared.gradientColor {
             if let view = self.view as? GradientBackgroundView {
                 view.setGradientColor(gradient: gradient)
@@ -94,30 +91,50 @@ class MenuViewController: UIViewController {
     }
     
     func loadInterstitialView() {
-        goToGameViewController()
-        //        self.view.showLoading()
-        //        let request = GADRequest()
-        //        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
-        //                                    request: request,
-        //                          completionHandler: { [self] ad, error in
-        //                            if let error = error {
-        //                              print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-        //                              return
-        //                            }
-        //                            interstitial = ad
-        //                            interstitial?.fullScreenContentDelegate = self
-        //
-        //                            interstitial?.present(fromRootViewController: self)
-        //                          }
-        //        )
+        // goToGameViewController()
+        
+        guard !Settings.shared.showAds else{
+            goToNextViewController()
+            return
+        }
+        
+        self.view.showLoading()
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+                               request: request,
+                               completionHandler: { [self] ad, error in
+            if let error = error {
+                print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            interstitial = ad
+            interstitial?.fullScreenContentDelegate = self
+            
+            interstitial?.present(fromRootViewController: self)
+        }
+        )
+    }
+    
+    func goToNextViewController() {
+        if Settings.shared.chessArray != nil {
+            goToGameViewController()
+        }
+        else {
+            goToPropertyViewController()
+        }
     }
 }
 
 //MARK: Setup elements
 extension MenuViewController {
     
+    func setupAvatarCornerRadius(){
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+    }
+    
     func setupImageView(){
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
+        avatarImageView.clipsToBounds = true
+//        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.isUserInteractionEnabled = true
@@ -125,14 +142,10 @@ extension MenuViewController {
     }
     
     func setupButtons(){
-        
-        
         startGameButton.caption = "Two players".localized
         scoreButton.caption = "History".localized
         settingsButton.caption = "Settings".localized
         infoButton.caption = "Info".localized
-//        guard let color = Settings.shared.gradientColor?.0 else {return}
-//        startGameButton.color = color
     }
     
     func setupActions(){
@@ -149,26 +162,25 @@ extension MenuViewController{
     @objc
     func tapStartGameButton(){
         
-        if Settings.shared.chessArray != nil {
-            let alert = UIAlertController(title: "Hello".localized, message: "You have a saved game. Are you continue or start new game?".localized, preferredStyle: .alert)
-            let newGame = UIAlertAction(title: "New game".localized, style: .cancel, handler: {_ in
-                Settings.shared.resetData()
-                self.goToPropertyViewController()
-                //                self.loadInterstitialView()
-            })
-            
-            let continueGame = UIAlertAction(title: "Continue".localized, style: .default) { _ in
-                self.goToGameViewController()
-                //                self.loadInterstitialView()
-            }
-            
-            alert.addAction(newGame)
-            alert.addAction(continueGame)
-            present(alert, animated: true, completion: nil)
-        } else {
-            goToPropertyViewController()
-            //            loadInterstitialView()
+        guard Settings.shared.chessArray != nil  else {
+            loadInterstitialView()
+            return
         }
+        
+        let alert = UIAlertController(title: "Hello".localized, message: "You have a saved game. Are you continue or start new game?".localized, preferredStyle: .alert)
+        let newGame = UIAlertAction(title: "New game".localized, style: .cancel, handler: {_ in
+            Settings.shared.resetData()
+            self.loadInterstitialView()
+        })
+        
+        let continueGame = UIAlertAction(title: "Continue".localized, style: .default) { _ in
+            self.loadInterstitialView()
+        }
+        
+        alert.addAction(newGame)
+        alert.addAction(continueGame)
+        present(alert, animated: true, completion: nil)
+       
     }
     
     @objc
@@ -210,13 +222,6 @@ extension MenuViewController{
 }
 
 //MARK: Animations
-extension MenuViewController {
-    
-    func hideElements(){
-        
-    }
-}
-
 
 extension MenuViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -231,20 +236,20 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
 extension MenuViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        print("Ad did fail to present full screen content.")
+       // print("Ad did fail to present full screen content.")
         self.view.closeLoading()
-        goToGameViewController()
+        goToNextViewController()
     }
     
     /// Tells the delegate that the ad will present full screen content.
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad will present full screen content.")
+      //  print("Ad will present full screen content.")
     }
     
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad did dismiss full screen content.")
+      //  print("Ad did dismiss full screen content.")
         self.view.closeLoading()
-        goToGameViewController()
+        goToNextViewController()
     }
 }

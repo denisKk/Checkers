@@ -79,7 +79,6 @@ class CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-                print("SAVED")
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")

@@ -12,7 +12,7 @@
 "Background Gradients" = "Фоновые градиенты";
 "Languages" = "Языки";
 "Checkers" = "Шашки";
-"SignIn" = "Регистрация";
+"SignIn" = "Добро пожаловать";
 "User name" = "Имя пользователя";
 "Enter" = "Войти";
 "Hello" = "Привет";
@@ -37,3 +37,5 @@
 "Time limit" = "Лимит времени";
 "Start game" = "Начать игру";
 "min" = "мин.";
+"hide Ads" = "выключить рекламу";
+"Advertisement" = "Реклама";

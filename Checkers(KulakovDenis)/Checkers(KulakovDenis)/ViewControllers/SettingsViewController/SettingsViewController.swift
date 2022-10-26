@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: "BackgroundGradientTableViewCell", bundle: nil), forCellReuseIdentifier: "BackgroundGradientTableViewCell")
         tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
+        tableView.register(UINib(nibName: "ShowAdsTableViewCell", bundle: nil), forCellReuseIdentifier: "ShowAdsTableViewCell")
         
         loadData()
         
@@ -36,8 +37,8 @@ class SettingsViewController: UIViewController {
         
         userClickLanguage = { languageCode in
             Settings.shared.currentLanguageCode = languageCode
-            self.tableView.reloadData()
             self.setupUI()
+            self.tableView.reloadData()
         }
     }
 
@@ -67,7 +68,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,6 +89,12 @@ extension SettingsViewController: UITableViewDataSource {
             }
             cell.userClickLanguage = userClickLanguage
             return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowAdsTableViewCell", for: indexPath) as? ShowAdsTableViewCell else {
+                return UITableViewCell()
+            }
+           
+            return cell
         default: return UITableViewCell()
         }
         
@@ -98,6 +105,7 @@ extension SettingsViewController: UITableViewDataSource {
         switch section {
         case 0: return "Background Gradients".localized
         case 1: return "Languages".localized
+        case 2: return "Advertisement".localized
         default:
             return ""
         }
@@ -120,7 +128,7 @@ extension SettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 1: return 50
+        case 1,2: return 50
         default:
             return 200
         }
