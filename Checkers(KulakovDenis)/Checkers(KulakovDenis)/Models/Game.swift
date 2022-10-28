@@ -80,7 +80,7 @@ class Game {
         }
     }
     
-    var players: [Player] = []
+    private var players: [Player] = []
     
     func startTimer() {
         

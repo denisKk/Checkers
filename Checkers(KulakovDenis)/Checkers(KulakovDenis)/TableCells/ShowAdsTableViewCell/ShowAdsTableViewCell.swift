@@ -11,6 +11,7 @@ import UIKit
 
 class ShowAdsTableViewCell: UITableViewCell {
     @IBOutlet weak var showAsdSwitch: UISwitch!
+    @IBOutlet weak var switchLabel: UILabel!
     
     let settings = Settings.shared
     override func awakeFromNib() {

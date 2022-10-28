@@ -7,14 +7,14 @@
 
 import UIKit
 
-class UserPanelView: UIView {
-
-    
+final class UserPanelView: UIView {
+ 
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var flagButton: BorderButton!
-    @IBOutlet weak var handsButton: BorderButton!
+    @IBOutlet var userName: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var flagButton: BorderButton!
+    @IBOutlet var handsButton: BorderButton!
+ 
     var isFlipped: Bool = false {
         didSet {
             if isFlipped {
@@ -112,14 +112,5 @@ class UserPanelView: UIView {
         handsButton.isEnabled = false
     
     }
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

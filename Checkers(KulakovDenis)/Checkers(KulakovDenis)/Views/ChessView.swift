@@ -41,9 +41,8 @@ enum ChessColor: String {
     }
 }
 
-class ChessView: UIView {
+final class ChessView: UIView {
     
-    //  var color: ChessColor
     var type: ChessType
     var isQueen = false {
         didSet {

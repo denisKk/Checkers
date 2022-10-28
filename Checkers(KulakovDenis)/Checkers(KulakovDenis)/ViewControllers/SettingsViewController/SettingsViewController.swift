@@ -93,7 +93,7 @@ extension SettingsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowAdsTableViewCell", for: indexPath) as? ShowAdsTableViewCell else {
                 return UITableViewCell()
             }
-           
+            cell.switchLabel.text = "hide Ads".localized
             return cell
         default: return UITableViewCell()
         }
