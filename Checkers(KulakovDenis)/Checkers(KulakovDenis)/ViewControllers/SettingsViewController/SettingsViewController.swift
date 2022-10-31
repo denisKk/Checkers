@@ -7,10 +7,10 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
     
     var userClickGradient: (((UIColor, UIColor)) -> ())?
     var userClickLanguage: ((String) -> ())?
@@ -21,9 +21,9 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "BackgroundGradientTableViewCell", bundle: nil), forCellReuseIdentifier: "BackgroundGradientTableViewCell")
-        tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
-        tableView.register(UINib(nibName: "ShowAdsTableViewCell", bundle: nil), forCellReuseIdentifier: "ShowAdsTableViewCell")
+        tableView.register(UINib(nibName: String(describing: BackgroundGradientTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: BackgroundGradientTableViewCell.self))
+        tableView.register(UINib(nibName: String(describing: LanguageTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: LanguageTableViewCell.self))
+        tableView.register(UINib(nibName: String(describing: ShowAdsTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ShowAdsTableViewCell.self))
         
         loadData()
         
@@ -75,7 +75,7 @@ extension SettingsViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "BackgroundGradientTableViewCell", for: indexPath) as? BackgroundGradientTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: BackgroundGradientTableViewCell.self), for: indexPath) as? BackgroundGradientTableViewCell else {
                 return UITableViewCell()
             }
             cell.userClickGradient = userClickGradient
@@ -84,16 +84,16 @@ extension SettingsViewController: UITableViewDataSource {
             }
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as? LanguageTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: LanguageTableViewCell.self), for: indexPath) as? LanguageTableViewCell else {
                 return UITableViewCell()
             }
             cell.userClickLanguage = userClickLanguage
             return cell
         case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowAdsTableViewCell", for: indexPath) as? ShowAdsTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowAdsTableViewCell.self), for: indexPath) as? ShowAdsTableViewCell else {
                 return UITableViewCell()
             }
-            cell.switchLabel.text = "hide Ads".localized
+            cell.configure()
             return cell
         default: return UITableViewCell()
         }

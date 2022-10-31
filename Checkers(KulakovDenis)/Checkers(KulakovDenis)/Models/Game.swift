@@ -43,7 +43,7 @@ enum MessageType {
     case draw
 }
 
-class Game {
+final class Game {
     static let shared = Game()
     
     private(set) var durationTime: Int = 0

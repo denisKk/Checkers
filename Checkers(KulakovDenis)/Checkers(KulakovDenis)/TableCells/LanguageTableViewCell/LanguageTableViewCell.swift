@@ -7,9 +7,9 @@
 
 import UIKit
 
-class LanguageTableViewCell: UITableViewCell {
+final class LanguageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
@@ -21,7 +21,7 @@ class LanguageTableViewCell: UITableViewCell {
     func setupCollectionView(){
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib.init(nibName: "LanguageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LanguageCollectionViewCell")
+        collectionView.register(UINib.init(nibName: String(describing: LanguageCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: LanguageCollectionViewCell.self))
     }
 }
 
@@ -29,7 +29,7 @@ class LanguageTableViewCell: UITableViewCell {
 extension LanguageTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LanguageCollectionViewCell", for: indexPath) as? LanguageCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: LanguageCollectionViewCell.self), for: indexPath) as? LanguageCollectionViewCell else {
             return UICollectionViewCell()
         }
         

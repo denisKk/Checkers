@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackgroundGradientTableViewCell: UITableViewCell {
+final class BackgroundGradientTableViewCell: UITableViewCell {
     
     let gradientsArray: [(UIColor, UIColor)] = [
         (#colorLiteral(red: 0.04705882353, green: 0.7294117647, blue: 0.7294117647, alpha: 1), #colorLiteral(red: 0.2196078431, green: 0, blue: 0.2117647059, alpha: 1)),
@@ -26,7 +26,7 @@ class BackgroundGradientTableViewCell: UITableViewCell {
     
     var userClickGradient: (((UIColor, UIColor)) -> ())?
   
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCollectionView()
@@ -35,7 +35,7 @@ class BackgroundGradientTableViewCell: UITableViewCell {
     func setupCollectionView(){
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib.init(nibName: "BackgroundGradientCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BackgroundGradientCollectionViewCell")
+        collectionView.register(UINib.init(nibName: String(describing: BackgroundGradientCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: BackgroundGradientCollectionViewCell.self))
     }
     
     func compareColors(index: Int) -> Bool {
@@ -56,7 +56,7 @@ class BackgroundGradientTableViewCell: UITableViewCell {
 extension BackgroundGradientTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BackgroundGradientCollectionViewCell", for: indexPath) as? BackgroundGradientCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BackgroundGradientCollectionViewCell.self), for: indexPath) as? BackgroundGradientCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.setup(with: gradientsArray[indexPath.item], check: compareColors(index: indexPath.row))

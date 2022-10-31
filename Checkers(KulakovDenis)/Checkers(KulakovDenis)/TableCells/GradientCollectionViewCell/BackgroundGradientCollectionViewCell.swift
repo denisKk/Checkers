@@ -9,11 +9,10 @@ import UIKit
 
 
 
-class
-BackgroundGradientCollectionViewCell: UICollectionViewCell {
+final class BackgroundGradientCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var checkmarkImage: UIImageView!
-    @IBOutlet weak var gradientView: UIView!
+    @IBOutlet var checkmarkImage: UIImageView!
+    @IBOutlet var gradientView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

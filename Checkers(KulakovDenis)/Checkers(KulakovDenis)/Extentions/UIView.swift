@@ -8,12 +8,15 @@
 import UIKit
 
 extension UIView {
+    
+    static let tagConstant = 110101
+    
     func showLoading() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.tag = 110101
+        blurEffectView.tag = UIView.tagConstant
         
         let activityIndicator = UIActivityIndicatorView(style: .large)
         
@@ -29,7 +32,7 @@ extension UIView {
     }
     
     func closeLoading() {
-        let blur = subviews.first(where: { $0.tag == 110101 })
+        let blur = subviews.first(where: { $0.tag == UIView.tagConstant })
         
         UIView.animate(withDuration: 0.1) {
             blur?.alpha = 0

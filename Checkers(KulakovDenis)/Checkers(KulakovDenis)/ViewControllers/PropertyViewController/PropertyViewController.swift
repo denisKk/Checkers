@@ -7,12 +7,12 @@
 
 import UIKit
 
-class PropertyViewController: UIViewController {
+final class PropertyViewController: UIViewController {
 
-    @IBOutlet weak var boardSizeSegment: UISegmentedControl!
-    @IBOutlet weak var secondPlayerNameTextField: UITextField!
-    @IBOutlet weak var startGameButton: BorderButton!
-    @IBOutlet weak var timeLimitPicker: UIPickerView!
+    @IBOutlet var boardSizeSegment: UISegmentedControl!
+    @IBOutlet var secondPlayerNameTextField: UITextField!
+    @IBOutlet var startGameButton: BorderButton!
+    @IBOutlet var timeLimitPicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

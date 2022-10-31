@@ -7,13 +7,12 @@
 
 import UIKit
 
-class LanguageCollectionViewCell: UICollectionViewCell {
+final class LanguageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var backView: UIView!
+    @IBOutlet var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         backView.layer.cornerRadius = 4
         backView.layer.borderColor = UIColor.green.cgColor
     }

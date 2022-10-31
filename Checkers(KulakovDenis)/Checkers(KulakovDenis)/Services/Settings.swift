@@ -22,7 +22,7 @@ enum BoardSize: Int {
     }
 }
 
-class Settings: NSObject {
+final class Settings: NSObject {
     
     static let shared = Settings()
     

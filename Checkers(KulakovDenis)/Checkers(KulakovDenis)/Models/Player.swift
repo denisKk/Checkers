@@ -29,7 +29,7 @@ enum PlayerResult: Int{
     }
 }
 
-class Player {
+final class Player {
     var name: String
     var avatar: UIImage?
     var color: ChessColor

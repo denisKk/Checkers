@@ -7,13 +7,11 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
     
-    @IBOutlet weak var topPlayerView: UserPanelView!
-    
-    @IBOutlet weak var bottomPlayerView: UserPanelView!
-    
-    @IBOutlet weak var chessboardView: UIView!
+    @IBOutlet var topPlayerView: UserPanelView!
+    @IBOutlet var bottomPlayerView: UserPanelView!
+    @IBOutlet var chessboardView: UIView!
     
     let game = Game.shared
     

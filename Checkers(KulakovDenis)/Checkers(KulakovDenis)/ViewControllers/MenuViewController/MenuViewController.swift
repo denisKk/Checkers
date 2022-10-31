@@ -8,14 +8,14 @@
 import UIKit
 import GoogleMobileAds
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
     
-    @IBOutlet weak var startGameButton: BorderButton!
-    @IBOutlet weak var scoreButton: BorderButton!
-    @IBOutlet weak var settingsButton: BorderButton!
-    @IBOutlet weak var infoButton: BorderButton!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet var startGameButton: BorderButton!
+    @IBOutlet var scoreButton: BorderButton!
+    @IBOutlet var settingsButton: BorderButton!
+    @IBOutlet var infoButton: BorderButton!
+    @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet var avatarImageView: UIImageView!
     
     private var interstitial: GADInterstitialAd?
     
@@ -91,7 +91,6 @@ class MenuViewController: UIViewController {
     }
     
     func loadInterstitialView() {
-        // goToGameViewController()
         
         guard !Settings.shared.showAds else{
             goToNextViewController()

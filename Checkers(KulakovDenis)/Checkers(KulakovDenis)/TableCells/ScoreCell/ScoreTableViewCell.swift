@@ -16,20 +16,20 @@ struct ScoreItem {
 }
 
 
-class ScoreTableViewCell: UITableViewCell {
+final class ScoreTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var blackCrownImage: UIImageView!
-    @IBOutlet weak var blackChessImage: UIImageView!
-    @IBOutlet weak var playerBlackLabel: UILabel!
-    @IBOutlet weak var whiteCrownImage: UIImageView!
-    @IBOutlet weak var whiteChessImage: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var playerWhiteLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var boardSize: UILabel!
-    @IBOutlet weak var whiteTimeLabel: UILabel!
+    @IBOutlet var blackCrownImage: UIImageView!
+    @IBOutlet var blackChessImage: UIImageView!
+    @IBOutlet var playerBlackLabel: UILabel!
+    @IBOutlet var whiteCrownImage: UIImageView!
+    @IBOutlet var whiteChessImage: UIImageView!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var playerWhiteLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var boardSize: UILabel!
+    @IBOutlet var whiteTimeLabel: UILabel!
     
-    @IBOutlet weak var blackTimeLabel: UILabel!
+    @IBOutlet var blackTimeLabel: UILabel!
     var dateFormatter: DateFormatter {
        let date = DateFormatter()
         date.dateFormat = "d MMM y"
@@ -77,15 +77,5 @@ extension ScoreTableViewCell {
         blackChessImage.tintColor = player.color.cgColor
         blackCrownImage.image = player.result.image()
     }
-    
-    
-    
-//    func setup(with scoreItem: ScoreItem){
-//        timeLabel.text = scoreItem.time
-//        dateLabel.text = scoreItem.date
-//        playerWhiteLabel.text = scoreItem.whitePlayerName
-//        playerBlackLabel.text = scoreItem.blackPlayerName
-//        whiteCrownImage.isHidden = !scoreItem.isWhiteWin
-//        blackCrownImage.isHidden = scoreItem.isWhiteWin
-//    }
+
 }
