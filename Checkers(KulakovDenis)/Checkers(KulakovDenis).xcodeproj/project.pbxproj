@@ -36,6 +36,7 @@
 		B8882705286BB52600831F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8882707286BB52600831F73 /* Localizable.strings */; };
 		B8BD3D8929087CA200EDC67B /* ShowAdsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8BD3D8729087CA200EDC67B /* ShowAdsTableViewCell.xib */; };
 		B8BD3D8A29087CA200EDC67B /* ShowAdsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BD3D8829087CA200EDC67B /* ShowAdsTableViewCell.swift */; };
+		B8BD3D9329107BEC00EDC67B /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8BD3D9229107BEC00EDC67B /* StartViewController.storyboard */; };
 		B8FDE71F27C5769A0087F33C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE71E27C5769A0087F33C /* AppDelegate.swift */; };
 		B8FDE72127C5769A0087F33C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE72027C5769A0087F33C /* SceneDelegate.swift */; };
 		B8FDE72827C5769C0087F33C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE72727C5769C0087F33C /* Assets.xcassets */; };
@@ -100,6 +101,8 @@
 		B8882714286BB82300831F73 /* be */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = be; path = be.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8BD3D8729087CA200EDC67B /* ShowAdsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowAdsTableViewCell.xib; sourceTree = "<group>"; };
 		B8BD3D8829087CA200EDC67B /* ShowAdsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAdsTableViewCell.swift; sourceTree = "<group>"; };
+		B8BD3D9129107BB000EDC67B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B8BD3D9229107BEC00EDC67B /* StartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartViewController.storyboard; sourceTree = "<group>"; };
 		B8FDE71B27C5769A0087F33C /* Checkers(KulakovDenis).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkers(KulakovDenis).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FDE71E27C5769A0087F33C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FDE72027C5769A0087F33C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -324,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				B8FDE74427C5772F0087F33C /* StartViewController.swift */,
+				B8BD3D9229107BEC00EDC67B /* StartViewController.storyboard */,
 			);
 			path = StartViewController;
 			sourceTree = "<group>";
@@ -500,6 +504,7 @@
 				B858213D286463E100D02D03 /* UserPanelView.xib in Resources */,
 				B858214A2865045100D02D03 /* PropertyViewController.storyboard in Resources */,
 				B83D4B1828329AF400688464 /* GoogleService-Info.plist in Resources */,
+				B8BD3D9329107BEC00EDC67B /* StartViewController.storyboard in Resources */,
 				B88826FB286BAD8000831F73 /* LanguageTableViewCell.xib in Resources */,
 				B8FDE72B27C5769C0087F33C /* LaunchScreen.storyboard in Resources */,
 				B8882700286BAE9A00831F73 /* LanguageCollectionViewCell.xib in Resources */,
@@ -636,6 +641,7 @@
 			children = (
 				B8882712286BB60400831F73 /* ru */,
 				B8882714286BB82300831F73 /* be */,
+				B8BD3D9129107BB000EDC67B /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
