@@ -13,7 +13,7 @@ extension String {
               let langBundle = Bundle(url: url) else {
             return self
         }
-        
+
         return NSLocalizedString(self, bundle: langBundle, comment: "")
     }
 }

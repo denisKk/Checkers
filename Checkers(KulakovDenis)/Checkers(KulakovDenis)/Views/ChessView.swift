@@ -9,10 +9,10 @@ import UIKit
 
 enum ChessColor: String {
     typealias ColorValue = UIColor
-    
+
     case white
     case black
-    
+
     var cgColor: ColorValue {
         switch self {
         case .white:
@@ -21,8 +21,8 @@ enum ChessColor: String {
             return #colorLiteral(red: 0.1176470588, green: 0.1215686275, blue: 0.1490196078, alpha: 1)
         }
     }
-    
-    mutating func toggle(){
+
+    mutating func toggle() {
         switch self {
         case .white:
             self = .black
@@ -30,7 +30,7 @@ enum ChessColor: String {
             self = .white
         }
     }
-    
+
     func getSimpleChessType() -> ChessType {
         switch self {
         case .white:
@@ -42,7 +42,7 @@ enum ChessColor: String {
 }
 
 final class ChessView: UIView {
-    
+
     var type: ChessType
     var isQueen = false {
         didSet {
@@ -51,31 +51,31 @@ final class ChessView: UIView {
             }
         }
     }
-    
+
     init(width: CGFloat, type: ChessType) {
         self.type = type
         let scale = 0.8
         super.init(frame: CGRect(origin: .zero, size: CGSize(width: width * scale, height: width * scale)))
-        
+
         if let color = type.getChessColor() {
             self.backgroundColor = color.cgColor
             let alpha = (color == .white) ? 1 : 0.3
             self.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1).withAlphaComponent(alpha).cgColor
         }
-        
+
         self.layer.cornerRadius = width * scale / 2
         self.layer.borderWidth = 0
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func showQueen() {
         guard let color = self.type.getChessColor() else {
             return
         }
-        
+
         let imageView = UIImageView(frame: self.bounds)
         var imageColor = color
         imageColor.toggle()
@@ -86,20 +86,20 @@ final class ChessView: UIView {
         self.addSubview(imageView)
 
     }
-    
-    func showIn(view: UIView, showQueen: Bool = false, onCompletion: (() -> ())? = nil) {
+
+    func showIn(view: UIView, showQueen: Bool = false, onCompletion: (() -> Void)? = nil) {
         view.subviews.forEach({$0.removeFromSuperview()})
         view.addSubview(self)
         self.center = CGPoint(x: view.frame.width / 2, y: view.frame.width / 2)
         onCompletion?()
     }
-    
-    func hide(){
+
+    func hide() {
         self.removeFromSuperview()
     }
-    
-    func border(show: Bool){
+
+    func border(show: Bool) {
         self.layer.borderWidth = show ? 3 : 0
     }
-    
+
 }

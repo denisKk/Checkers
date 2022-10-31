@@ -8,31 +8,29 @@
 import Foundation
 import UIKit
 
-
 extension UILabel {
-    func setButtonModifier(){
+    func setButtonModifier() {
         self.textColor = .white
         self.textAlignment = .center
         self.font = UIFont(name: "Montserrat", size: 24)
     }
-    
-    func setTitleModifier(){
+
+    func setTitleModifier() {
         self.textColor = .white
         self.textAlignment = .center
         self.font = UIFont(name: "Montserrat-Thin", size: 30)
     }
-    
-    func size(w: Double, h: Double){
-        self.frame = CGRect(origin: .zero, size: CGSize(width: w, height: h))
+
+    func size(width: Double, height: Double) {
+        self.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
     }
-    
+
     @IBInspectable var localizationKey: String {
-        set {
-            self.text = newValue.localized
-        }
-        
         get {
             return self.text ?? ""
+        }
+        set {
+            self.text = newValue.localized
         }
     }
 }

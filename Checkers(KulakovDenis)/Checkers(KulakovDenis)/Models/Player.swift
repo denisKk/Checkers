@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-enum PlayerResult: Int{
+enum PlayerResult: Int {
     case none
     case win
     case lose
     case draw
     case abort
-    
+
     func image() -> UIImage? {
         switch self {
         case .none, .lose:
@@ -48,12 +48,11 @@ final class Player {
             didTimeChanged?()
         }
     }
-    
-    var didActivityChanged: (() -> ())?
-    var didTimeChanged: (() -> ())?
-    var didResultChanged: (() -> ())?
-    
-    
+
+    var didActivityChanged: (() -> Void)?
+    var didTimeChanged: (() -> Void)?
+    var didResultChanged: (() -> Void)?
+
     init(name: String, color: ChessColor, time: Int) {
         self.name = name
         self.color = color

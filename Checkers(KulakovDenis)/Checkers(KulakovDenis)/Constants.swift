@@ -6,8 +6,14 @@
 //
 import UIKit
 
+struct Constants {
+    var boadrSize: Int {
+        Settings.shared.boardSize.rawValue
+    }
+}
+
 var BOARD_SIZE: Int {
-    get { Settings.shared.boardSize.rawValue }
+    Settings.shared.boardSize.rawValue
 }
 var SCREEN_WIDTH: CGFloat {
     return UIScreen.main.bounds.width
@@ -15,4 +21,3 @@ var SCREEN_WIDTH: CGFloat {
 var SCREEN_HEIGHT: CGFloat {
     return UIScreen.main.bounds.height
 }
-

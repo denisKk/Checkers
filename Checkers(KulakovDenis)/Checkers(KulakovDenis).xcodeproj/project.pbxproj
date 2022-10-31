@@ -43,7 +43,6 @@
 		B8FDE73827C576E50087F33C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73327C576E50087F33C /* UIView.swift */; };
 		B8FDE73B27C576E50087F33C /* UIViewController + CoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73627C576E50087F33C /* UIViewController + CoreKit.swift */; };
 		B8FDE73C27C576E50087F33C /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE73727C576E50087F33C /* UILabel.swift */; };
-		B8FDE74A27C5772F0087F33C /* StartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FDE74227C5772F0087F33C /* StartViewController.storyboard */; };
 		B8FDE74B27C5772F0087F33C /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE74427C5772F0087F33C /* StartViewController.swift */; };
 		B8FDE74F27C577450087F33C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE74E27C577450087F33C /* Constants.swift */; };
 		B8FDE75327C57D690087F33C /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDE75227C57D690087F33C /* GradientBackgroundView.swift */; };
@@ -95,8 +94,6 @@
 		B88826FD286BAE9A00831F73 /* LanguageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B88826FE286BAE9A00831F73 /* LanguageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B8882706286BB52600831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B888270E286BB5AE00831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/StartViewController.storyboard; sourceTree = "<group>"; };
-		B8882710286BB5D300831F73 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8882711286BB60400831F73 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8882712286BB60400831F73 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8882713286BB82300831F73 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -327,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				B8FDE74427C5772F0087F33C /* StartViewController.swift */,
-				B8FDE74227C5772F0087F33C /* StartViewController.storyboard */,
 			);
 			path = StartViewController;
 			sourceTree = "<group>";
@@ -441,6 +437,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8FDE72F27C5769C0087F33C /* Build configuration list for PBXNativeTarget "Checkers(KulakovDenis)" */;
 			buildPhases = (
+				B8BD3D8B2910015900EDC67B /* ShellScript */,
 				F33D54C6657BB477319D081A /* [CP] Check Pods Manifest.lock */,
 				B8FDE71727C5769A0087F33C /* Sources */,
 				B8FDE71827C5769A0087F33C /* Frameworks */,
@@ -501,7 +498,6 @@
 				B8FDE78527C91B190087F33C /* BackgroundGradientTableViewCell.xib in Resources */,
 				B8436F0B27CE70FE00947EF2 /* ScoreViewController.storyboard in Resources */,
 				B858213D286463E100D02D03 /* UserPanelView.xib in Resources */,
-				B8FDE74A27C5772F0087F33C /* StartViewController.storyboard in Resources */,
 				B858214A2865045100D02D03 /* PropertyViewController.storyboard in Resources */,
 				B83D4B1828329AF400688464 /* GoogleService-Info.plist in Resources */,
 				B88826FB286BAD8000831F73 /* LanguageTableViewCell.xib in Resources */,
@@ -535,6 +531,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Checkers(KulakovDenis)/Pods-Checkers(KulakovDenis)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B8BD3D8B2910015900EDC67B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		F33D54C6657BB477319D081A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -621,19 +634,10 @@
 		B8FDE72927C5769C0087F33C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B8882710286BB5D300831F73 /* en */,
 				B8882712286BB60400831F73 /* ru */,
 				B8882714286BB82300831F73 /* be */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		B8FDE74227C5772F0087F33C /* StartViewController.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B888270E286BB5AE00831F73 /* en */,
-			);
-			name = StartViewController.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
