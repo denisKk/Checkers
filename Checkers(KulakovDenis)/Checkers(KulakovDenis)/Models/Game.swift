@@ -85,9 +85,10 @@ final class Game {
 
         guard !gameTimer.isValid else {return}
 
-        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[currentStep, timeLimit] _ in
-            if let player = currentStep {
-                switch timeLimit {
+        gameTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[weak self] _ in
+
+            if let self = self, let player = self.currentStep {
+                switch self.timeLimit {
                 case .unlimit:
                     player.time += 1
                 default:
