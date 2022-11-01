@@ -21,3 +21,14 @@ The final project of the iOS Developer course by TeachMeSkills.
     <li>Localization: English, Belarusian, Russian </li>
     <li>Frameworks: Google Mobile Ads SDK (used CocoaPods)</li>
 </ul>
+
+<h4>Description & preview</h4>
+<table>
+<tr>
+    <td>1.</td>
+    <td>A simple interface with onboarding scroll view</td>
+    <td><img src="/previews/onboarding.gif"></td>
+    
+</tr>
+
+</table>
