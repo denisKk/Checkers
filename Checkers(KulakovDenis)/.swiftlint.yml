@@ -1,16 +1,19 @@
 disabled_rules:
   - function_parameter_count
   - nesting
-  - variable_name
+  - identifier_name
   - trailing_comma
+  - file_length
 opt_in_rules:
   - empty_count
   - force_unwrapping
   - private_outlet
 line_length: 120
 type_body_length:
-  warning: 300
+  warning: 350
   error: 400
+function_body_length:
+  warning: 45
 excluded:
   - Pods
 reporter: "xcode"

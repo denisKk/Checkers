@@ -101,8 +101,8 @@
 		B8882714286BB82300831F73 /* be */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = be; path = be.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8BD3D8729087CA200EDC67B /* ShowAdsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowAdsTableViewCell.xib; sourceTree = "<group>"; };
 		B8BD3D8829087CA200EDC67B /* ShowAdsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAdsTableViewCell.swift; sourceTree = "<group>"; };
-		B8BD3D9129107BB000EDC67B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8BD3D9229107BEC00EDC67B /* StartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartViewController.storyboard; sourceTree = "<group>"; };
+		B8E46CBA29108E7F004F8DC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FDE71B27C5769A0087F33C /* Checkers(KulakovDenis).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkers(KulakovDenis).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FDE71E27C5769A0087F33C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FDE72027C5769A0087F33C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -480,6 +480,7 @@
 				en,
 				ru,
 				be,
+				Base,
 			);
 			mainGroup = B8FDE71227C5769A0087F33C;
 			productRefGroup = B8FDE71C27C5769A0087F33C /* Products */;
@@ -539,6 +540,7 @@
 		};
 		B8BD3D8B2910015900EDC67B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -552,7 +554,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "count=0\nfor file_path in $(git ls-files -om --exclude-from=.gitignore | grep \".swift$\"); do\n    export SCRIPT_INPUT_FILE_$count=$file_path\n    count=$((count + 1))\ndone\nfor file_path in $(git diff --cached --name-only | grep \".swift$\"); do\n    export SCRIPT_INPUT_FILE_$count=$file_path\n    count=$((count + 1))\ndone\n    export SCRIPT_INPUT_FILE_COUNT=$count\n    swiftlint lint --use-script-input-files\n";
 		};
 		F33D54C6657BB477319D081A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -641,7 +643,7 @@
 			children = (
 				B8882712286BB60400831F73 /* ru */,
 				B8882714286BB82300831F73 /* be */,
-				B8BD3D9129107BB000EDC67B /* en */,
+				B8E46CBA29108E7F004F8DC4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -779,6 +781,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Checkers(KulakovDenis)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Checkers;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -810,6 +813,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Checkers(KulakovDenis)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Checkers;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

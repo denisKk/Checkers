@@ -41,7 +41,6 @@ enum MessageType {
     case draw
 }
 
-//
 final class Game {
     static let shared = Game()
 
@@ -120,7 +119,6 @@ final class Game {
     func finishGame() {
         gameTimer.invalidate()
         saveGameToBase()
-        Settings.shared.resetData()
     }
 
     func isDraw(agree: Bool) {
@@ -387,14 +385,14 @@ final class Game {
     func checkStepBy(tag: Int, direction: Direction) -> Bool {
         return getChessType(by: tag + direction.rawValue) == ChessType.none ? true : false
     }
-
+    // swiftlint:disable:next cyclomatic_complexity
     func getFireSteps(for tag: Int, directions: [Direction], type: ChessType, array: [FireStep] = []) {
         var newArray: [FireStep] = []
         var countDirection = 0
         for direction in directions {
             newArray = array
             var nextTag = tag
-            if type.isQueen() {// }, array.isEmpty {
+            if type.isQueen() {
                 while getChessType(by: nextTag + direction.rawValue) == ChessType.none {
                     nextTag += direction.rawValue
                 }

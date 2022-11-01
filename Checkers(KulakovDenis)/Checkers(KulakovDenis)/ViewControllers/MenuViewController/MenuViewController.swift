@@ -24,6 +24,7 @@ final class MenuViewController: UIViewController {
         loadData()
         setupActions()
         setupImageView()
+        setupAvatarCornerRadius()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +42,6 @@ final class MenuViewController: UIViewController {
 
     func setupUI() {
         setupButtons()
-        setupAvatarCornerRadius()
         if let gradient = Settings.shared.gradientColor {
             if let view = self.view as? GradientBackgroundView {
                 view.setGradientColor(gradient: gradient)
@@ -127,12 +127,11 @@ final class MenuViewController: UIViewController {
 extension MenuViewController {
 
     func setupAvatarCornerRadius() {
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarImageView.layer.cornerRadius = 10
     }
 
     func setupImageView() {
         avatarImageView.clipsToBounds = true
-//        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.isUserInteractionEnabled = true

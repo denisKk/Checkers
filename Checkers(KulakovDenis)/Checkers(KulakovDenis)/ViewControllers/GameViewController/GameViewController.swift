@@ -312,7 +312,6 @@ struct AnimationItem {
 }
 
 extension GameViewController {
-    
     // Timer for step animation
     func startAnimationTimer() {
         guard animationTimer.isValid == false else {
