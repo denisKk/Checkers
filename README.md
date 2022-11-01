@@ -27,7 +27,7 @@ The final project of the iOS Developer course by TeachMeSkills.
 <tr>
     <td>1.</td>
     <td>A simple interface with onboarding scroll view</td>
-    <td><img src="previews/onboarding.gif"></td>
+    <td><img src="/Previews/onboarding.gif" width="190" height="400" /></td>
     
 </tr>
 
