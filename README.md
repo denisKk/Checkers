@@ -27,8 +27,41 @@ The final project of the iOS Developer course by TeachMeSkills.
 <tr>
     <td>1.</td>
     <td>A simple interface with onboarding scroll view</td>
-    <td><img src="/Previews/onboarding.gif" width="190" height="400" /></td>
+    <td> 
+	  <video src='https://user-images.githubusercontent.com/7559885/199356881-6f3b367f-386e-47ac-abc0-0a003682b3e1.mov' />
+	</td>
     
 </tr>
+	<tr>
+    <td>2.</td>
+    <td>Possibility to change background, localization and disable Ads</td>
+    <td> 
+<video src='https://user-images.githubusercontent.com/7559885/199359071-b1b330b8-bee8-4dce-b851-dbe24ca0c816.mov' width=30 />
+	</td>
+    
+</tr>
+<tr>
+    <td>3.</td>
+    <td>Can choice board size and time limit</td>
+    <td> 
+<video src='https://user-images.githubusercontent.com/7559885/199359943-4f9824af-b0f8-443e-98cb-1d00e9c6fbd9.mov' />
+	</td>
+</tr>
+<tr>
+    <td>4.</td>
+    <td>Backlighting current pieces and possibility steps</td>
+    <td> 
+<video src='https://user-images.githubusercontent.com/7559885/199360514-d2a983b5-a29b-4595-a219-fe19f732715e.mov' />
+	</td>
+</tr>
+	<tr>
+    <td>5.</td>
+    <td>Autocomplete steps </td>
+    <td> 
+<video src='https://user-images.githubusercontent.com/7559885/199362426-6e708af0-7957-4d7e-a88c-2b4e73ccea46.mov' width='50%'/><br/>
+	    <video src='https://user-images.githubusercontent.com/7559885/199362462-ab81244b-c395-4169-8a72-0f6453aafd23.mov' />
+	</td>
+</tr>
+
 
 </table>
