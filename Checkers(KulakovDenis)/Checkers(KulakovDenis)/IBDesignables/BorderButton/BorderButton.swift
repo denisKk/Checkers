@@ -10,51 +10,49 @@ import UIKit
 @IBDesignable
 class BorderButton: UIView {
 
-    @IBOutlet var contentView: UIView!
-    @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var captionLabel: UILabel!
+    @IBOutlet private var imageView: UIImageView!
+
     @IBInspectable var isEnabled: Bool {
-        set {isEnabled_ = newValue}
         get {return isEnabled_}
+        set {isEnabled_ = newValue}
     }
-    
+
     private var isEnabled_: Bool = true {
         didSet {setupColor()}
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
-    
+
     @IBInspectable var caption: String {
-        set {captionLabel.text = newValue.localized}
         get {return captionLabel.text ?? ""}
+        set {captionLabel.text = newValue.localized}
     }
-    
+
     @IBInspectable var image: UIImage? {
-        set {imageView.image = newValue}
         get {return imageView.image}
+        set {imageView.image = newValue}
     }
-    
+
     private var color_: UIColor = .clear {
         didSet {setupColor()}
     }
-    
+
     @IBInspectable var color: UIColor {
-        set {color_ = newValue}
         get { return color_}
+        set {color_ = newValue}
     }
-    
-    
-    private func setupUI(){
+
+    private func setupUI() {
         Bundle(for: BorderButton.self).loadNibNamed("BorderButton", owner: self, options: nil)
         contentView.frame = bounds
         contentView.backgroundColor = UIColor.clear
@@ -64,7 +62,7 @@ class BorderButton: UIView {
         self.addSubview(contentView)
     }
 
-    func setupColor(){
+    func setupColor() {
         if isEnabled {
             contentView.layer.borderColor = color_.cgColor
             captionLabel.textColor = color_
@@ -75,18 +73,17 @@ class BorderButton: UIView {
             imageView.tintColor = .lightGray
         }
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard isEnabled else {return}
         contentView.backgroundColor = #colorLiteral(red: 0.3529411765, green: 0.7843137255, blue: 0.9607843137, alpha: 0.2629087334)
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         contentView.backgroundColor = UIColor.clear
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         contentView.backgroundColor = UIColor.clear
     }
 }
-

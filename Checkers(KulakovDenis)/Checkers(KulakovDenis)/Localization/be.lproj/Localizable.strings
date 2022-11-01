@@ -12,7 +12,7 @@
 "Background Gradients" = "Градыенты фону";
 "Languages" = "Мовы";
 "Checkers" = "Шашкі";
-"SignIn" = "Рэгістрацыя";
+"SignIn" = "Прывітанне";
 "User name" = "Імя карыстальніка";
 "Enter" = "Увайсці";
 "Hello" = "Добры дзень";
@@ -37,3 +37,5 @@
 "Time limit" = "Тэрмін часу";
 "Start game" = "Пачаць гульню";
 "min" = "хв.";
+"hide Ads" = "схаваць рэкламу";
+"Advertisement" = "Рэклама";

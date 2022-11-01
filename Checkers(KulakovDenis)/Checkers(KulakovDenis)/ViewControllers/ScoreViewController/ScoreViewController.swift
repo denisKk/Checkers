@@ -7,32 +7,26 @@
 
 import UIKit
 
-class ScoreViewController: UIViewController {
+final class ScoreViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    
-//    let scoreArray: [ScoreItem] = [
-//        ScoreItem(whitePlayerName: "August Frazier", blackPlayerName: "Dean Knowles", date: "20 June 2021", time: "23:12", isWhiteWin: true),
-//        ScoreItem(whitePlayerName: "Leo Wilder", blackPlayerName: "Arnold Pollard", date: "17 Feb 2022", time: "05:01", isWhiteWin: false),
-//        ScoreItem(whitePlayerName: "Harold Reese", blackPlayerName: "Joseph Harmon", date: "1 Jan 2022", time: "12:30", isWhiteWin: false),
-//        ScoreItem(whitePlayerName: "Troy Woodward", blackPlayerName: "Sean Duncan", date: "5 Sep 2021", time: "00:23", isWhiteWin: true)
-//    ]
-    
+    @IBOutlet private var tableView: UITableView!
+
     var dataArray: [GameHistory] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUI()
+
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 135
-        tableView.register(UINib(nibName: "ScoreTableViewCell", bundle: nil), forCellReuseIdentifier: "ScoreTableViewCell")
+        tableView.register(
+            UINib(
+                nibName: String(describing: ScoreTableViewCell.self),
+                bundle: nil),
+            forCellReuseIdentifier: String(describing: ScoreTableViewCell.self))
         dataArray = CoreDataManager.shared.getAllGamesDB()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setupUI()
     }
 
     @IBAction func closeButtonTap(_ sender: Any) {
@@ -40,8 +34,7 @@ class ScoreViewController: UIViewController {
     }
 }
 
-
-//MARK: Setup elements
+// MARK: Setup elements
 extension ScoreViewController {
     func setupUI() {
         if let gradient = Settings.shared.gradientColor {
@@ -49,30 +42,22 @@ extension ScoreViewController {
                 view.setGradientColor(gradient: gradient)
             }
         }
-        
-        
+
     }
 }
-
 
 extension ScoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScoreTableViewCell", for: indexPath) as? ScoreTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: ScoreTableViewCell.self),
+            for: indexPath) as? ScoreTableViewCell else {
             return UITableViewCell()
         }
         cell.setup(with: dataArray[indexPath.row])
         return cell
     }
-    
-    
-}
-
-extension ScoreViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 125
-//    }
 }

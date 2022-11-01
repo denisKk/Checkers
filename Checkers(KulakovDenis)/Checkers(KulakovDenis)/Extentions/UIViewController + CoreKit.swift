@@ -9,10 +9,10 @@ import UIKit
 
 extension UIViewController {
     static var getInstanceViewController: UIViewController? {
-        return UIStoryboard(name: String(describing: self), bundle: nil).instantiateInitialViewController()
+        UIStoryboard(name: String(describing: self), bundle: nil).instantiateInitialViewController()
     }
-    
+
     static func getViewController(with identifier: String) -> UIViewController? {
-        return UIStoryboard(name: String(describing: self), bundle: nil).instantiateViewController(withIdentifier: identifier)
+        UIStoryboard(name: String(describing: self), bundle: nil).instantiateViewController(withIdentifier: identifier)
     }
 }

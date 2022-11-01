@@ -7,21 +7,19 @@
 
 import UIKit
 
-class LanguageCollectionViewCell: UICollectionViewCell {
+final class LanguageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private var backView: UIView!
+    @IBOutlet private var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         backView.layer.cornerRadius = 4
         backView.layer.borderColor = UIColor.green.cgColor
     }
 
-    func setup(with title:String, bordered: Bool){
+    func setup(with title: String, bordered: Bool) {
         titleLabel.text = title.uppercased()
         backView.layer.borderWidth = bordered ? 2 : 0
     }
-    
-    
+
 }

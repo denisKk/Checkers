@@ -8,20 +8,20 @@
 import UIKit
 
 @IBDesignable class GradientBackgroundView: UIView {
-    
+
     var gradientLayer: CAGradientLayer {
-        return layer as! CAGradientLayer
+        return (layer as? CAGradientLayer) ?? CAGradientLayer()
     }
 
     override open class var layerClass: AnyClass {
         return CAGradientLayer.classForCoder()
     }
 
-    func setGradientColor(gradient: (UIColor, UIColor)){
+    func setGradientColor(gradient: (UIColor, UIColor)) {
         startColor = gradient.0
         endColor = gradient.1
     }
-    
+
     @IBInspectable var startColor: UIColor? {
         didSet { gradientLayer.colors = cgColorGradient }
     }
@@ -45,7 +45,7 @@ extension GradientBackgroundView {
         guard let startColor = startColor, let endColor = endColor else {
             return nil
         }
-        
+
         return [startColor.cgColor, endColor.cgColor]
     }
 }

@@ -7,14 +7,13 @@
 
 import Foundation
 
-class PlayerHistory {
+struct PlayerHistory {
     var name: String
     var result: PlayerResult
     var time: Int
     var color: ChessColor
-    
-    
-    init(name: String, result: PlayerResult, time: Int, color: ChessColor){
+
+    init(name: String, result: PlayerResult, time: Int, color: ChessColor) {
         self.name = name
         self.result = result
         self.time = time
