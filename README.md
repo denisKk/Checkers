@@ -1,7 +1,6 @@
 <h1>Checkers</h1>
 <p>
 Checkers mobile game for two players face-to-face.<br>
-The final project of the iOS Developer course by TeachMeSkills.
 </p>
 
 
